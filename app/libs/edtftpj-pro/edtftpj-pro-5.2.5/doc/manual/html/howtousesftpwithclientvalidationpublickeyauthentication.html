@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (with client validation - public key authentication)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (with client validation - public key authentication)</h1>
+        <p>The topic <a href="howtousesftpwithclientvalidation.html">How to use SFTP (with client validation - password authentication)</a> discusses the simplest form of client authentication, via password.</p>
+        <p>In public key authentication, SSH clients and servers authenticate each other via public/private key pairs. Each must have access to their own private key, and they must have access to each other's 
+            public key (unless server validation is disabled).
+        </p>
+        <p>You should ensure that the server's public keys are loaded by the client as described in <a href="howtousesftpwithservervalidationknownhosts.html">How to use SFTP (with server validation - known hosts)</a>, 
+            or you may want to <a href="howtouseftpswithoutservervalidation.html">switch off server validation</a> to get started.
+        </p>
+        <p>The client's public key must be registered with the SSH server, typically by copying it into the server's <i>authorized_keys</i> file. </p>
+        <p>The client's private key is loaded via <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>'s 
+            <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setAuthentication%28java.lang.String,%20java.lang.String,%20java.lang.String%29">setAuthentication</a> method before calling connect, 
+            supplying the full path of the private key file, the SSH username and the passphrase of the private key file:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setAuthentication%28java.lang.String,%20java.lang.String,%20java.lang.String%29">setAuthentication</a>("C:\\myhome\\.ssh\\id_rsa", username, passphrase);</code></pre>
+        <p>Both DSA and RSA keypairs can be used. </p>
+        <p>There are no formal standards for SSH private key files, however three main formats are in common use. All are supported by edtFTPj/PRO (PuTTY since version 1.5.7).</p>
+        <table border="1"  bordercolor="#999999"  width="567"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+            <tbody>
+                <tr>
+                    <td><b>Private Key Type</b></td>
+                    <td><b>Start of key</b></td>
+                </tr>
+                <tr>
+                    <td><tt>OpenSSH</tt></td>
+                    <td><tt>-----BEGIN DSA PRIVATE KEY-----</tt></td>
+                </tr>
+                <tr>
+                    <td><tt>SSH.com</tt></td>
+                    <td><tt>---- BEGIN SSH2 ENCRYPTED PRIVATE KEY ----</tt></td>
+                </tr>
+                <tr>
+                    <td><tt>PuTTY</tt></td>
+                    <td><tt>PuTTY-User-Key-File-2:</tt>></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The format is automatically detected when the file is loaded.</p>
+        <p>Note that earlier versions of edtFTPj/PRO (prior to 1.5.7) do not support PuTTY keys, but they can be easily converted into SSH.COM or OpenSSH formats via PuTTYgen. 
+            The <i>PuTTYgen.exe</i> utility can be freely downloaded from <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">here</a>. 
+            It is a simple GUI application that can generate keypairs, and import and export keys in various formats.
+        </p>
+        <p>On the <i>File</i> menu item, select <i>Load Private Key</i> and load your PuTTY private key file. You can optionally enter your key's passphrase (which is advisable - otherwise the converted key 
+            will be saved without a passphrase, which is insecure). Then via <i>Conversions -> Export OpenSSH</i> key you can export your private key to another file in OpenSSH format (similarly for ssh.com format).
+        </p>
+        <p>The other authentication method, keyboard-interactive authentication, is discussed in <a href="howtousesftpwithclientvalidationkeyboardinteractiveauthentication.html">How to use SFTP (with client validation - keyboard-interactive authentication)</a>.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

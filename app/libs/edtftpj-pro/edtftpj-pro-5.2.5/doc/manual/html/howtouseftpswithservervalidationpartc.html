@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (with server validation - part C)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (with server validation - part C)</h1>
+        <p>This topic continues from <a href="howtouseftpswithservervalidationparta.html">How to use FTPS (with server validation - part A)</a> and <a href="howtouseftpswithservervalidationpartb.html">How to use FTPS (with server validation - part B)</a>.</p>
+        <p>Sometimes it may be desirable to ignore the CommonName (CN) of the server's certificate completely.  A new instance of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPStandardValidator.html">SSLFTPStandardValidator</a> must be created and assigned, as shown below: </p>
+        <pre><code class="language-java">ftp.setCustomValidator(new <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPStandardValidator.html#SSLFTPStandardValidator%28boolean%29">SSLFTPStandardValidator</a>(false));</code></pre>
+        <p>Here, the <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPStandardValidator.html">SSLFTPStandardValidator</a>'s constructor is supplied with a flag indicating it should not attempt to match the CN of the server certificate with the hostname.</p>
+        <p>In this case the server's certificate is still validated against the loaded CA certificate, but its CommonName (CN) is ignored.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

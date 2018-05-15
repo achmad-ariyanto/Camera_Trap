@@ -1,0 +1,28 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Hostname Checking</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 3," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Hostname Checking</h1>
+    <p>One of the steps in server validation is host-name checking.  Host-name checking is a simple check that is performed when a secure connection is being established. It involves comparing the following two items: </p>
+    <ul>
+        <li>the host-name that is (usually) contained in the certificate which the FTPS server is presenting </li>
+        <li>the host-name of the machine on which the FTPS server is running </li>
+    </ul>
+    <p>If they match then one can be confident that the server to which the client is connected is in fact the server to which the certificate was issued. If they do not match, then there's a possibility that the 
+        certificate has been stolen and that the server, to which the client is connected, is attempting to "impersonate" the actual server to which the client is actually connected. This is a form of "man-in-the-middle" 
+        attack, which gives the attacker complete control over the data being sent and received. 
+    </p>
+    <p>Unfortunately, the most widely compatible version of the X.509 certificate standard does not specify exactly how a host-name should be defined within a server certificate. 
+        The convention is that the Common Name (CN) field of the certificate should be used, and, while this is followed by the majority of Certificate Authorities (CAs), it is not universal. 
+    </p>
+    <p>If it is possible to configure the FTPS server's certificate then the Common Name (CN) field of the certificate must be the same as the host-name of the machine on which the FTPS server is running. </p>
+    <p>Disabling host-name checking is strongly discouraged and should only be done as a last resort if the FTPS server's certificate cannot be configured so that its CN parameter contains its host-name.</p>
+    <p>Next: <a href="selectingciphers.html">Selecting Ciphers</a></p>
+</body>
+</html>
+

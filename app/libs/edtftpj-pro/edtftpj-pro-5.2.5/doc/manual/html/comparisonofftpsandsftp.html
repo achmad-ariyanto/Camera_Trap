@@ -1,0 +1,34 @@
+<html>
+  <head>
+      <title>Comparison of FTPS and SFTP</title>
+      <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+  </head>
+  <body>
+      <h1>Comparison of FTPS and SFTP</h1>
+      <p>While FTPS and SFTP are completely different protocols, they offer the same basic feature - secure file transfers.  It is therefore common to be faced with the choice of one or the other. 
+          This section provides some pros and cons of these two protocols.
+      </p>
+      <h4>Security</h4>
+      <p>Under ideal conditions SFTP and FTPS are able to offer comparable levels of security, but many SFTP deployments suffer from a vulnerability that is an artifact of SFTP's close relationship with SSH.  
+          The problem arises when you want to allow client SFTP access on a server but not SSH access. This is generally not a problem for pure SFTP servers, but for SSH/SFTP servers such as OpenSSH it can be 
+          quite complex and error-prone. So if you are not very careful when you set up your servers, users on machines with the SFTP client installed will be able to use an SSH client to log into the server 
+          and execute commands. This is not a problem with FTPS since this is purely a file transfer protocol and not a remote console protocol.
+      </p>
+      <h4>Upgrading</h4>
+      <p>FTPS is a straight-forward extension to an existing FTP infrastructure. It is supported by most commercial servers and many open source servers (e.g. wu-ftpd and proftpd), so enabling FTPS on a server 
+          is usually just a matter of adding a few configuration options. There is no need to run additional servers since FTPS servers invariably also support FTP. There is also no need to open additional ports 
+          in firewalls since FTPS uses the same ports as FTP. It is important to note that data-transfer problems can sometimes arise when changing from FTP to FTPS - see "Firewalls" section below.
+      </p>
+      <h4>Certificates</h4>
+      <p>SFTP uses keys rather than certificates. This means that it can't take advantage of the "chains of trust" paradigm facilitated through Certificate Authorities. This paradigm makes it possible for two 
+          entities to establish a trust relationship without directly exchanging security information, which is important for some applications. FTPS uses certificates and therefore can take advantage of this paradigm. 
+          SFTP clients must install keys on the server.
+      </p>
+      <h4>Firewalls</h4>
+      <p>SFTP often works better through some firewalls since it does not rely on multiple connections like FTP does.  As explained in an earlier chapter, FTP and FTPS both use a control channel to send commands, 
+          and a new data connection for each file transfer.  While the control channel is usually easily connected, it is common to experience firewall-related problems when connecting data-channels.  
+          This is particularly so in FTPS where the FTP-specific features of most firewalls are ineffective due to encryption.  Since SFTP relies on a single network connection, it does not suffer from these problems.
+      </p>
+  </body>
+</html>
+

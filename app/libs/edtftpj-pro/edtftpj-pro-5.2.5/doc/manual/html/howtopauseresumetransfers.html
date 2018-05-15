@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to pause and resume transfers</title>
+    <meta name="keywords" content="Chapter 3," />
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>How to pause and resume transfers</h1>
+    <p>FTP is generally quite a reliable way to transfer files. However at times network connections fail or processes are restarted, interrupting transfers. Also, it is sometimes necessary
+        to terminate transfers, particularly for larger files that take a long time to transfer.  
+    </p>
+    <p>In these cases, it is often desirable to resume transfers rather than starting them from scratch - especially for large files. This means only the remaining part of the file is 
+        subsequently uploaded or downloaded. 
+    </p>
+    <p>In edtFTPj/PRO, three methods are available to achieve transfer termination and resumption. These methods are supported in 
+        <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a>, 
+        <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, 
+        <a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html">ProFTPClient</a> and 
+        <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>.
+    </p>
+    <h4>Cancelling transfers</h4>
+    <p>Invoking <a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#cancelTransfer%28%29">cancelTransfer</a> will cancel the currently executing transfer. To be able to call 
+        this method during a transfer will require a separate thread. Once this method is called, the transfer will cease once the current transfer buffer is emptied:
+    </p>
+    <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#cancelTransfer%28%29">cancelTransfer</a>(); // called from a different thread </code></pre>
+    <p>Cancelling a transfer may leave the connection to the server in an inconsistent state. After cancelling a transfer, it may be necessary to quit and reconnect to the server.</p>
+    <h4>Resuming transfers</h4>
+    <p>Once a transfer has been cancelled or has been interrupted, <a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#resume%28%29">resume</a> can be used to complete the transfer. 
+        <b>Please note that resume is only supported for binary mode transfers</b>. For resuming both uploads and downloads, it relies on examining the partially downloaded or uploaded file to see 
+        how many bytes remain to be transferred. The remaining bytes are then appended to the partial file. This means methods that use a stream instead of a local filename cannot be used in 
+        resuming - there is no way to find out how large the local file is. To perform a resume, call resume, and then upload or download the file again, as shown below:
+    </p>
+    <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#resume%28%29">resume</a>();
+ftp.get(localFilename, remoteFilename); // gets the rest of the file</code></pre>
+    <p>Note that resume only applies to the next transfer (upload or download). The internal resume flag is reset once a transfer has been made. If two transfers in a row need to be resumed, 
+        <i>resume</i> must be called prior to each transfer.  
+    </p>
+    <p>Because <i>resume</i> relies only on the size of the partially downloaded or uploaded file, it does not matter how long ago the transfer failed or was terminated. As long as the partially 
+        transferred file is still available (and of course the original file to be transferred has not changed), resuming the transfer will work correctly.
+    </p>
+    <p>If <a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#resume%28%29">resume</a> is called erroneously, it can be cancelled by calling 
+        <a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#cancelResume%28%29">cancelResume</a>. This means the next transfer will not be resumed, but will be transferred completely. 
+    </p>
+    <h4>Arbitrary resumption</h4>
+    <p>Often, it is desirable to download from an arbitrary point in a file without actually resuming a previous download. This is done via the following method:</p>
+    <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClientInterface.html#resumeNextDownload(long)">resumeNextDownload(offset)</a>;</code></pre>
+    <p>The download begins not from the beginning of the remote file but from the offset. This is useful if the latter portion of a file is to be downloaded. 
+        This method can be used with any of the download methods, as a local file is not required to calculate the offset. 
+    </p>
+    <p>This method can't be used with uploads, and isn't necessary because the user has control over local data. To resume an upload arbitrarily, simply supply
+        the correct byte array as input, or the stream set to the correct offset. 
+    </p>
+    <script src="../js/prism.js"></script>    
+</body>
+</html>
+

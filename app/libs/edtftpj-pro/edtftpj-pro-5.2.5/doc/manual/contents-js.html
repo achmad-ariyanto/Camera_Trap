@@ -1,0 +1,520 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="css/contents.css" />
+    <link rel="stylesheet" href="css/js-content_style.css" />
+
+    <script>
+        
+        function minimizeAll(from_id){
+                
+            if(from_id!='a_started'){
+                document.getElementById('started').style.display = 'none';
+                document.getElementById('li_started').className = "";
+            }
+            
+            if(from_id!='a_howto'){
+                document.getElementById('howto').style.display = 'none';
+                document.getElementById('li_howto').className = "";
+            }
+            
+            if(from_id!='a_other'){
+                document.getElementById('other').style.display = 'none';
+                document.getElementById('li_other').className = "";
+            }	
+            
+            if(from_id='a_filetransfer'){
+                document.getElementById('filetransfer').style.display = 'none';
+                document.getElementById('li_filetransfer').className = "";
+            }
+
+            if(from_id='a_ftp'){
+                document.getElementById('ftp').style.display = 'none';
+                document.getElementById('li_ftp').className = "";
+            }
+
+            if(from_id='a_ftps'){
+                document.getElementById('ftps').style.display = 'none';
+                document.getElementById('li_ftps').className = "";
+            }
+
+
+            if(from_id='a_ftpsecurity'){
+                document.getElementById('ftpsecurity').style.display = 'none';
+                document.getElementById('li_ftpsecurity').className = "";
+            }
+
+            if(from_id='a_sftp'){
+                document.getElementById('sftp').style.display = 'none';
+                document.getElementById('li_sftp').className = "";
+            }
+
+            if(from_id='a_proxies'){
+                document.getElementById('proxies').style.display = 'none';
+                document.getElementById('li_proxies').className = "";
+            }
+            
+        }
+        
+        
+    </script>
+
+</head>
+
+<body onload="document.cookie='CFTPisDirected=CFTP'">
+
+    
+<thetitle>
+    edtFTPj/PRO User Guide
+</thetitle>
+
+<div id="contents">
+    <a style="display:none" href="html/intro.html">Intro</a>
+	
+    <!-- Getting started -->
+	<li id="li_started">
+        <a id="a_started" class="cd-faq-trigger" onclick="minimizeAll(this.id)">Getting started</a>
+        <div id="started" class="cd-faq-content" style="display: none">
+            <ul class="menu-toggle-list">
+                    <li class="none" id ="item_highlight">
+                        <a href="html/productoverview.html" target="basefrm">Product Overview</a>
+                    </li>
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/installation.html" target="basefrm">Installation</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/featurelist.html" target="basefrm">Feature List</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/usingedtftpjpro.html" target="basefrm">Key Classes</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/licenseagreement.html" target="basefrm">License Agreement</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/history.html" target="basefrm">Revision History</a>
+                    </li>
+					 <li class="ng-scope" id ="item_highlight">
+                        <a href="html/support.html" target="basefrm">Getting Help</a>
+                    </li>
+            </ul>
+        </div>
+    </li>
+    
+    <!-- How to... -->
+	<li id="li_howto">
+        <a id="a_howto" class="cd-faq-trigger" onclick="minimizeAll(this.id)">How to...</a>
+        <div id="howto" class="cd-faq-content" style="display: none">
+            <ul class="menu-toggle-list">
+                    <li class="none" id ="item_highlight">
+                        <a href="html/howtousethelicensefile.html" target="basefrm">How to use the license file</a>
+                    </li>
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtorunexamples.html" target="basefrm">How to run the examples</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtocreateanftpconnection.html" target="basefrm">How to connect to an FTP server</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtogetadirectorylisting.html" target="basefrm">How to get a directory listing</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtochangedirectories.html" target="basefrm">How to change directories</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouploadafile.html" target="basefrm">How to upload, download and delete a file</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtotransfermodes.html" target="basefrm">How to use binary or ASCII mode</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoconnectmodes.html" target="basefrm">How to use active or passive mode</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtotransferstreams.html" target="basefrm">How to transfer directly from/to memory</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtotransferstreams2.html" target="basefrm">How to transfer using FTP streams</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtomonitortransfers.html" target="basefrm">How to monitor transfers and commands</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtopauseresumetransfers.html" target="basefrm">How to pause and resume transfers</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousescripting.html" target="basefrm">How to use FTP scripting</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoshell.html" target="basefrm">How to use the FTP command shell</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtotransfermultiplefilesdirectories.html" target="basefrm">How to transfer multiple files and directories</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftc.html" target="basefrm">How to use the multi-protocol client</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseconnpooling.html" target="basefrm">How to use connection pooling</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseasyncmethods.html" target="basefrm">How to use asynchronous methods</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoftpthroughafilewall.html" target="basefrm">How to FTP through a NAT router/firewall</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoftpthroughasocksproxy.html" target="basefrm">How to FTP through a SOCKS proxy</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoftpthroughanhttpproxy.html" target="basefrm">How to FTP through an HTTP proxy</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoftpthroughotherproxyservers.html" target="basefrm">How to FTP through other proxy servers</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpcompression.html" target="basefrm">How to use data compression for FTP/FTPS</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousedifferentcharacterencodings.html" target="basefrm">How to use different character encodings</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousefxp.html" target="basefrm">How to use FXP for server-to-server transfers</a>
+                    </li>
+
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpsintroduction.html" target="basefrm">How to use FTPS (introduction)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithoutservervalidation.html" target="basefrm">How to use FTPS (without server validation)</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithservervalidationparta.html" target="basefrm">How to use FTPS (with server validation - part A)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithservervalidationpartb.html" target="basefrm">How to use FTPS (with server validation - part B)</a>
+                    </li>
+                    
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithservervalidationpartc.html" target="basefrm">How to use FTPS (with server validation - part C)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithclientservervalidation.html" target="basefrm">How to use FTPS (with client/server validation)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpsimplicit.html" target="basefrm">How to use FTPS (implicit)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtouseftpswithsftc.html" target="basefrm">How to use FTPS (with the multi-protocol client)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpintroduction.html" target="basefrm">How to use SFTP (introduction)</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithoutservervalidation.html" target="basefrm">How to use SFTP (without server validation)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithservervalidationknownhosts.html" target="basefrm">How to use SFTP (with server validation - known hosts)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithservervalidationauto.html" target="basefrm">How to use SFTP (with server validation - automatic)</a>
+                    </li>
+
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithservervalidationpublickeyfile.html" target="basefrm">How to use SFTP (with server validation - public key files)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithclientvalidation.html" target="basefrm">How to use SFTP (with client validation - password authentication)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithclientvalidationpublickeyauthentication.html" target="basefrm">How to use SFTP (with client validation - public key authentication)</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithclientvalidationkeyboardinteractiveauthentication.html" target="basefrm">How to use SFTP (with client validation - keyboard-interactive authentication)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpchoosingalgorithms.html" target="basefrm">How to use SFTP (choosing algorithms)</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpcompression.html" target="basefrm">How to use SFTP (data compression)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpkeypairgeneration.html" target="basefrm">How to use SFTP (keypair generation)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtousesftpwithsftc.html" target="basefrm">How to use SFTP (with the multi-protocol client)</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtosetuplogging.html" target="basefrm">How to set up logging</a>
+                    </li>	
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtosetuploggingextended.html" target="basefrm">How to set up extended logging</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtocreateacertificate.html" target="basefrm">How to create a certificate</a>
+                    </li>
+        
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtodiagnoseproblems.html" target="basefrm">How to diagnose problems</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtoresolvecommonproblems.html" target="basefrm">How to resolve common problems</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/howtomakefaster.html" target="basefrm">How to make transfers faster</a>
+                    </li>
+
+                    <li class="ng-scope" id ="item_highlight">
+                        <a href="html/support.html" target="basefrm">How to get help</a>
+                    </li>
+            </ul>
+         </div>
+    </li>
+   
+    <!-- Other Documentation -->
+    <li id="li_other">
+        <a id="a_other" class="cd-faq-trigger" onclick="minimizeAll(this.id)">Other Documentation</a>
+        <div id="other" class="cd-faq-content" style="display: none">
+
+            <ul class="menu-toggle-list">
+
+                <!-- Level 1: API Documentation -->
+                <li class="none" id ="item_highlight">
+                    <a href="../api/index.html" target="basefrm">API Documentation</a>
+                </li>
+
+                <!-- Level 1: Revision history -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="html/history.html" target="basefrm">Revision history</a>
+                </li>
+
+                <!-- Level 1: RFC 959 - FILE TRANSFER PROTOCOL (FTP) -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="rfc/rfc959.txt" target="basefrm">RFC 959 - FILE TRANSFER PROTOCOL (FTP)</a>
+                </li>
+
+                <!-- Level 1: RFC 2228 - FTP Security Extensions -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="rfc/rfc2228.txt" target="basefrm">RFC 2228 - FTP Security Extensions</a>
+                </li>
+
+                <!-- Level 1: RFC 4217 - Securing FTP with TLS -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="rfc/rfc4217.txt" target="basefrm">RFC 4217 - Securing FTP with TLS</a>
+                </li>
+
+                <!-- Level 1: SSH File Transfer Protocol -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="rfc/draft-ietf-secsh-filexfer.txt" target="basefrm">SSH File Transfer Protocol</a>
+                </li> 
+                
+                <!-- Level 1: About this manual -->
+                <li class="ng-scope" id ="item_highlight">
+                    <a href="html/about.html" target="basefrm">About this manual</a>
+                </li>
+            </ul>
+
+            <!-- Level 1: File Transfer Essentials -->
+            <ul class="menu-toggle-list">
+                <li id="li_filetransfer">
+                    <a id="a_filetransfer" class="cd-faq-trigger-sub-level1" href="#0">File Transfer Essentials</a>
+                    <div id="filetransfer" class="cd-faq-content" style="display: none;">
+
+                        <!-- Level 2: FTP Protocol Overview -->
+                        <ul class="menu-toggle-list">
+                            <li id="li_ftp">
+                                <a id="a_ftp" class="cd-faq-trigger-sub-level2" href="#0">FTP Protocol Overview</a>
+                                <div id="ftp" class="cd-faq-content" style="display: none;">
+                                    <ul class="menu-toggle-list">
+                                        <li class="none" id="item_highlight">
+                                            <a href="html/activeandpassivemodes.html" target="basefrm">Active and Passive modes</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/ftpcommands.html" target="basefrm">FTP Commands</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/samplescenarios.html" target="basefrm">Sample Scenarios</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/datatypes.html" target="basefrm">Data types</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/sessioncommands.html" target="basefrm">Session commands</a>
+                                        </li>
+                                            <li class="ng-scope" id="item_highlight">
+                                            <a href="html/filecommands.html" target="basefrm">File commands</a>
+                                            </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/directorycommands.html" target="basefrm">Directory commands</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Level 2: FTPS - Securing FTP with TLS -->
+                        <ul class="menu-toggle-list">
+                            <li id="li_ftps">
+                                <a id="a_ftps" class="cd-faq-trigger-sub-level2" href="#0">FTPS - Securing FTP with TLS</a>
+                                <div id="ftps" class="cd-faq-content" style="display: none;">
+                                    <ul class="menu-toggle-list">
+                                        <li class="none" id="item_highlight">
+                                            <a href="html/implicitftpsandexplicitftps.html" target="basefrm">Implicit FTPS and Explicit FTPS</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/securingcontrolanddatachannels.html" target="basefrm">Securing Control and Data Channels</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/ftpscommands.html" target="basefrm">FTPS Commands</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/ftpsusage.html" target="basefrm">FTPS Usage</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Level 2: The Essentials of FTP Security -->
+                        <ul class="menu-toggle-list">
+                            <li id="li_ftpsecurity">
+                                <a id="a_ftpsecurity" class="cd-faq-trigger-sub-level2" href="#0">The Essentials of FTP Security</a>
+                                <div id="ftpsecurity" class="cd-faq-content" style="display: none;">
+                                    <ul class="menu-toggle-list">
+                                        <li class="none" id="item_highlight">
+                                            <a href="html/publickeycryptography.html" target="basefrm">Public Key Cryptography</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/certificatesandcertificateauthoritiescas.html" target="basefrm">Certificates and Certificate Authorities (CAs)</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/obtainingkeysandcertificates.html" target="basefrm">Obtaining Keys and Certificates</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/serverandclientvalidation.html" target="basefrm">Server and Client Validation</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/hostnamechecking.html" target="basefrm">Hostname Checking</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/selectingciphers.html" target="basefrm">Selecting Ciphers</a>
+                                        </li>
+                                </ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Level 2: SFTP and SCP -->
+                        <ul class="menu-toggle-list">
+                            <li id="li_sftp">
+                                <a id="a_sftp" class="cd-faq-trigger-sub-level2" href="#0">SFTP and SCP</a>
+                                <div id="sftp" class="cd-faq-content" style="display: none;">
+                                    <ul class="menu-toggle-list">
+                                        <li class="none" id="item_highlight">
+                                            <a href="html/sshsecureshell.html" target="basefrm">SSH - Secure Shell</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/scp.html" target="basefrm">SCP - Secure Copy</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/sftpsshfiletransferprotocol2.html" target="basefrm">SFTP - SSH File Transfer Protocol</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/comparisonofftpsandsftp.html" target="basefrm">Comparison of FTPS and SFTP</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Level 2: Proxies -->
+                        <ul class="menu-toggle-list">
+                            <li id="li_proxies">
+                                <a id="a_proxies" class="cd-faq-trigger-sub-level2" href="#0">Proxies</a>
+                                <div id="proxies" class="cd-faq-content" style="display: none;">
+                                    <ul class="menu-toggle-list">
+                                        <li class="none" id="item_highlight">
+                                            <a href="html/httpproxies.html" target="basefrm">HTTP Proxies</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/socksproxies.html" target="basefrm">SOCKS Proxies</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/socks4andsocks4a.html" target="basefrm">SOCKS4 and SOCKS4A</a>
+                                        </li>
+                                        <li class="ng-scope" id="item_highlight">
+                                            <a href="html/socks5.html" target="basefrm">SOCKS5</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</div>
+
+<div id="footer">
+</div>
+
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+
+</body>
+
+</html>

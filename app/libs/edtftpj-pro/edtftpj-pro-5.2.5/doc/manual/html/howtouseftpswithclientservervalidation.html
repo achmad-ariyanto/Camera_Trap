@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (with client/server validation)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (with client/server validation)</h1>
+        <p>The topic <a href="howtouseftpsintroduction.html">How to use FTPS (introduction)</a> describes the FTPS features of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>.  
+            This topic demonstrates the use of FTPS with server validation and client authentication through client certificates.
+        </p>
+        <p>Client authentication via certificates is unnecessary for many applications, as username/password often provides a sufficient level of authentication.</p>
+        <p>On the occasions where it is required, the client's certificate and private key must be supplied. Two formats are supported - the PEM format and Java keystore.</p>
+        <p>Note that for a client certificate to be validated by a server the certificate must either be (1) installed on the server, or (2) have been issued by a CA whose certificate is recognized by the server.</p>
+        <p>The PEM format certificate and private key must be formatted as below:</p>
+        <p>
+        <pre>
+  -----BEGIN xxx PRIVATE KEY-----
+  ... client's private key ...
+  -----END xxx PRIVATE KEY-----
+  -----BEGIN CERTIFICATE-----
+  ... client's certificate ...
+  -----END CERTIFICATE-----
+		</pre>
+        <p>
+        <p>where xxx defines the keytype which must be either RSA or DSA.</p>
+        <p>The <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#loadClientCertificate%28java.lang.String,%20java.lang.String%29">loadClientCertificate</a> method is used to load the client's private key 
+            and certificate in PEM format from the supplied file. 
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#loadClientCertificate%28java.lang.String,%20java.lang.String%29">loadClientCertificate</a>(clientCertFilename, clientKeyPassphrase);</code></pre>
+        <p>Alternatively, <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#setClientCertificate%28java.security.cert.Certificate,%20java.security.PrivateKey%29">setClientCertificate</a> can be used to 
+            supply a Java Certificate object and PrivateKey. To load a certificate and a private key from a Java keystore, code similar to the following should be used:
+        </p>
+        <pre><code class="language-java">KeyStore keyStore = KeyStore.getInstance("JKS");
+keyStore.load(new FileInputStream(keyStoreFileName, keyStorePassword.toCharArray());
+Certificate certificate = keyStore.getCertificate(alias);
+PrivateKey privateKey = (PrivateKey)keyStore.getKey(alias, privateKeyPassword.toCharArray());
+ftp.setClientCertificate(certificate, privateKey); </code></pre>
+        <p>The topic <a href="obtainingkeysandcertificates.html">Obtaining Keys and Certificates</a> for instructions on producing keys and certificates. A general overview of private/public keys is presented in the topic 
+            <a href="publickeycryptography.html">Public Key Cryptography</a>.
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

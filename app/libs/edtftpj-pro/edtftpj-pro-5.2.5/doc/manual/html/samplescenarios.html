@@ -1,0 +1,47 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Sample Scenarios</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Topic 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>Sample Scenarios</h1>
+    <h4>Example 1</h4>
+    <p>For example, to change directory the client sends:</p>
+    <pre><code class="language-java">> CWD dirname</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">250 CWD command successful</code></pre>
+    <p>As the reply begins with a '2', we know the command sequence is completed. </p>
+    <p>However if we attempt to change directory to one that does not exist:</p>
+    <pre><code class="language-java">> CWD nonexistentdir</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">550 nonexistentdir: The system cannot find the file specified.</code></pre>
+    <p>As the reply begins with a '5' we know that the command failed.</p>
+    <h4>Example 2</h4>
+    <p>To transfer a text file, we issue a 'RETR' command to the server.  However to transfer the file we require a data connection to be set up. This can be done using active or passive mode.</p>
+    <p>As discussed previously, in active mode, the client sends a 'PORT' command, indicating what address and port number the server should connect to:</p>
+    <pre><code class="language-java">> PORT 192,168,10,1,4,93</code></pre>
+    <p>The first four digits are the IP address, and the last two encode the port number (in two 8-bit fields, the first being the high order bits of the 16-bit port number).</p>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">200 PORT command successful.</code></pre>
+    <p>This indicates that the data connection has been established.</p>
+    <p>Next, the 'RETR' command is issued:</p>
+    <pre><code class="language-java">> RETR abc.txt</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">150 Opening ASCII mode data connection for abc.txt(70776 bytes).</code></pre>
+    <p>The reply begins with a '1', so we know that the command was successful, but the server will be sending another reply – the client cannot issue another command until this is received.</p>
+    <p>Eventually, the server sends:</p>
+    <pre><code class="language-java">226 Transfer complete.</code></pre>
+    <p>The command sequence is complete, the file has been transferred, and the client can issue another command.</p>
+    <p>See RFC 959 for details about the second digit, and more extensive examples.</p>
+    <p>Note that most standard command-line FTP clients support debug mode, which displays the FTP commands that are being sent to the server, and the reply strings that are received back. 
+        Typing "debug" at the prompt will usually put the client into debug mode.
+    </p>
+    <p>Next: <a href="datatypes.html">Data Types</a></p>
+    <script src="../js/prism.js"></script>  
+</body>
+</html>
+

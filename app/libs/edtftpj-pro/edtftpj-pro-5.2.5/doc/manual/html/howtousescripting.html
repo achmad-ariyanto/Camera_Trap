@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTP scripting</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTP scripting</h1>
+        <p><a href="http://www.enterprisedt.com/products/edtftpjssl/overview.html">edtFTPj/PRO</a> includes a powerful scripting engine that allows users to list FTP commands in a text file, 
+            and then execute all the commands sequentially. The script can be be run via a batch file (or Unix shell script), or the <a href="../../api/com/enterprisedt/net/ftp/script/ScriptEngine.html">ScriptEngine</a> 
+            class can be used within an application to run a script.
+        </p>
+        <p>The script engine supports the FTP, FTPS (both implicit and explicit) and SFTP protocols. For FTPS, both client and server validation is supported. </p>
+        <h4>Sample code</h4>
+        <p>A sample script is shown below:</p>
+        <pre><code class="language-java"># Sample FTP script using FTP initially
+# then changing to FTPS
+#
+set remotehost=edtmobile
+set port=21
+set user=javaftp
+set password=javaftp
+set connectmode=passive
+set timeout=30
+set protocol=ftp
+set localdir=D:\work\tmp
+    
+# client and server validation for FTPS
+set servercert=d:\work\ftp-ssl\test\conf\server.cert.pem
+set clientcert=d:\work\ftp-ssl\test\conf\client.pem
+set certpassword=password
+    
+# logging off = 0, highest level = 5
+set loglevel=5
+set logfile=D:\work\ftp-ssl\tmp\script.log
+    
+# connect to the server
+# optional remotehost and port supplied
+# override the params set earlier
+open edtmobile 21
+cd remote/test
+    
+# change to secure mode
+auth tls
+    
+# force binary mode transfers
+binary
+    
+# put the local file test.jar to the server as mytest.jar
+put test.jar mytest.jar
+    
+# rename it
+rename mytest.jar test2.jar
+    
+# and get it back as test3.jar in the local working directory
+get test2.jar test3.jar
+    
+# delete all *.jar files in the current directory on
+# the server
+mdelete *.jar
+    
+# disconnect
+close</code></pre>
+        <h4>Running a script</h4>
+        <p>To run the above script, assuming it is saved in a file called script.txt, simply supply it as the first argument to the 
+            <a href="../../api/com/enterprisedt/net/ftp/script/ScriptEngine.html">ScriptEngine</a> class
+        </p>
+        <pre><code class="language-java">java -classpath %CP% com.enterprisedt.net.ftp.script.ScriptEngine script.txt</code></pre>
+        <p>(where %CP% contains <i>edtftpjpro.jar</i> and <i>license.jar</i>).</p>
+        <p>Alternatively, a comprehensive set of command line parameters can be used as described below: </p>
+        <pre><code class="language-java">[-h] [-c configfile] [-f scriptfile] [-u user] [-p password] [-v]
+    
+-f scriptfile : script to execute.
+-c configfile : config script to execute before main scriptfile.
+-h            : display this help
+-u user       : set the user name (optional)
+-p password   : set the user password (optional)
+-v            : print version details </code></pre>
+        <p>For example:</p>
+        <pre><code class="language-java">java -classpath %CP% com.enterprisedt.net.ftp.script.ScriptEngine -c config.txt -f script.txt </code></pre>
+        <p>In this example, a configuration file is supplied in addition to the script file to run. The settings in the configuration file are loaded 
+            before the script file is executed, so the file can be used for common settings. 
+        </p>
+        <p>If the <i>runscript.bat</i> (or <i>runscript</i> on Unix) batch script is used: </p>
+        <pre><code class="language-java">runscript -c config.txt -f script.txt </code></pre>
+        <p>If the <a href="../../api/com/enterprisedt/net/ftp/script/ScriptEngine.html">ScriptEngine</a> is used directly from code to run scripts via the executeScript() methods, 
+            the <a href="../../api/com/enterprisedt/net/ftp/script/ScriptResult.html">ScriptResult</a> object that is returned can be examined for various statistics collected about the script execution. 
+        </p>
+        <h4>Command overview</h4>
+        <p>Most commands are fairly self explanatory. 
+        <p>
+        <p>The set command is used to set various parameters that are used during the session, such as username, password, timeout and so on. Many of these parameters are optional 
+            (e.g. port, timeout). The most important parameter is the protocol. 
+        </p>
+        <p>The local working directory is by default the standard Java working directory for the application, but the set <i>localdir</i> command can be used to set a different local working directory. 
+            All uploads and downloads that do not specify a full path will use the set local working directory. 
+        </p>
+        <h4>Command reference</h4>
+        <p>The scripting commands are described in the <a href="scriptreference.html">command reference</a>. </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

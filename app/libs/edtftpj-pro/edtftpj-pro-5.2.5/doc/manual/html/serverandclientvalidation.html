@@ -1,0 +1,31 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Server and Client Validation</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 3," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Server and Client Validation</h1>
+    <p>The previous sections described how public key certificates may be used to validate parties involved in secure communications.  They also explained why some work, time, and cost is involved in obtaining 
+        certificates.  
+    </p>
+    <p>The nature of Internet usage is such that it is important to distinguish between server validation and client validation.  Server validation allows a client to know that it is talking to the intended server.  
+        Conversely, client validation allows a server to know that it is talking to the intended client.
+    </p>
+    <p>It is often more important for a client to know that it is talking to the intended server than the converse.  The reason for this is often financial.  For example, if a client is purchasing an item 
+        from an online retailer, the client needs to be certain that their credit card details are going to the intended destination.  While it might be nice for the retailer to be certain where the money 
+        if coming from, it is not usually essential.  Therefore, server validation is nearly always used in such transactions, but client validation is less often used.  Other applications, such as Internet 
+        banking often use both client and server validation.
+    </p>
+    <p>In FTPS, both server and client validation by certificate are optional.  Though the server's certificate is always sent, it is up to the client whether or not it validates the certificate.  
+        It is up to the client whether or not it will try to validate itself to the server, but some servers have a policy of not allowing unvalidated clients to access some or all its resources.
+    </p>
+    <p>It is important to note that, although many FTPS servers don't request client certificates, most require a user-name and password to be sent.  
+        If these are sent over a secure control channel then a reasonable level of client validation is inherent.
+    </p>
+    <p>Next: <a href="hostnamechecking.html">Hostname Checking</a></p>
+</body>
+</html>
+

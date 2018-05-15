@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+        <title>How to use asynchronous methods</title>
+    </head>
+    <body>
+        <h1>How to use asynchronous methods</h1>
+        <p><a href="../../api/com/enterprisedt/net/ftp/AsyncFileTransferClient.html">AsyncFileTransferClient</a> provides an interface that enables developers to obtain the advantages of multi-threading without 
+            having to explicitly write any multi-threaded code. Multiple file-transfer operations may be launched from a single thread, such that they execute concurrently in the background. 
+        </p>
+        <p>The basic pattern is to call one of the asynchronous methods such as downloadFileAsync(). When an asynchronous method is invoked a file-transfer job is queued and the method returns. 
+            The job will continue running in the background until it has completed. Once it has completed it will optionally invoke a user-specified callback function. The developer may place in the callback 
+            function any code that needs to be executed after the job is complete. This may involve, for example, some sort of clean-up operation, or perhaps the launching of another job. The following illustrates 
+            connecting to a server using an asynchronous method: 
+        </p>
+        <pre><code class="language-java">public class MyConnectTest implements Connect {
+    
+private AsyncFileTransferClient client = new AsyncFileTransferClient();
+    
+public void startConnecting() {
+  client.setRemoteHost(host);
+  client.setUserName(user);
+  client.setPassword(password);
+  client.connectAsync(this, null);
+}
+    
+public void onConnect(ConnectResult result)
+  throws FTPException, IOException {
+  result.endAsync();
+  System.out.println("Connected!")
+}</code></pre>
+        <p>Notice that MyConnectTest implements the Connect callback interface. This interface has a single method called "onConnect". This method is what is referred to as a "callback method" and is called once 
+            the connection has completed. 
+        </p>
+        <p>As with <i>SecureFileTransferClient</i>, it is important to note that when <i>connectAsync()</i> is called, a thread pool and a connection pool are created for servicing requests. 
+            The <i>disconnectAsync()</i> method <b>must</b> be called to terminate the pools. If <i>disconnectAsync()</i> is not called, <b>applications will not exit</b>. 
+            Synchronous and asynchronous methods can be mixed, so <i>disconnect()</i> could also be used. 
+        </p>
+        <h4>Callback methods</h4>
+        <p>Every asynchronous call can take a callback object, and when the operation is completed (in the background), the callback is notified. Each asynchronous call supports its own callback interface 
+            that must be implemented by the callback object. A call-specific result object is passed into the callback. In the case of connectAsync(), the callback class implements the <i>Connect</i> callback interface, 
+            and a ConnectResult object is passed into onConnect().
+        </p>
+        <p>To complete the asynchronous operation, the endAsync() method on the result object must be called. If called from within the callback (as shown above), endAsync() returns immediately, 
+            as the operation has completed. As the result object is also returned when an asynchronous call is first initiated, it can be called immediately afterwards. In this instance, it will block 
+            until the call is completed. 
+        </p>
+        <h4>Callback chaining</h4>
+        <p>Subsequent asynchronous methods can be called from within callbacks, creating a chain of callbacks. This creates what is called the <b>callback context</b> for the chain - a group of settings 
+            that are independent of the AsyncFileTransferClient as a whole. These settings can be changed without affecting any other operations on AsyncFileTransferClient, including other callback chains. 
+        </p>
+        <p><b><u>Do not call synchronous methods from within a callback</u></b>. The synchronous method call in the callback will be waiting to get a free connection, while the asynchronous call that resulted in 
+            the callback has not yet freed the connection (and it can't until the synch call has completed). This will result in deadlock if the pool has only one connection. Even with more than one connection, 
+            as soon as multiple asynchronous method calls are made, deadlock will result. 
+        </p>
+        <p>These settings are the remote directory, the content type (ASCII or binary), and content type detection (and automatic switching). This is so that if multiple callbacks are being called, 
+            they can each navigate down a different directory tree, and one can perform binary transfers while another use ASCII. 
+        </p>
+        <p>This means that a <i>changeDirectoryAsync</i> launched from the main thread will eventually change the directory of all connections when it has completed. But if the same method is called from 
+            within a callback, only that callback's subsequent operations will see the changed directory. So in the example below, the changeDirectoryAsync() call only changes the remote directory for the callback chain. 
+        </p>
+        <pre><code class="language-java">public class MyTransferTest implements Connect {
+    
+  public void startConnecting() {
+    AsyncFileTransferClient client = new AsyncFileTransferClient();
+    client.connectAsync(this, null);
+  }
+    
+  public void onConnect(ConnectResult result)
+    throws FTPException, IOException {
+    result.endAsync();
+    result.getClient().changeDirectoryAsync(dir, this, null);
+  }
+    
+  public void onChangeDirectory(ChangeDirectoryResult result)
+    throws FTPException, IOException {
+    result.endAsync();
+    result.getClient().uploadFileAsync(localFilepath, remoteFileName, null, null);
+  }
+}</code></pre>
+        <p>It should be noted that the result object always has a reference to the <i>AsyncFileTransferClient</i> instance that initiated the asynchronous call. This reference is available via the <i>getClient()</i> method. </p>
+        <h4>Tags</h4>
+        <p>
+            Every asynchronous method has a final optional parameter of type Object, called 'tag'. This is simply a convenient placeholder for any object that the developer wishes to have available in the callback method. 
+            It can be obtained by calling <i>getTag()</i> on the result object. It is most useful when the callback method is on a different object altogther. For example, the size of the local file being uploaded 
+            might be passed in here, so when the upload is complete, the user can be notified that a file of size x has been uploaded. 
+        </p>
+        <h4>Exception handling</h4>
+        <p>Exceptions are reported when endAsync() is called, i.e. if an exception occurred during the operation, it is thrown at this point. An error listener can also be set up to collect exceptions. 
+            In the example below, the calling class must implement the <i>ErrorListener</i> interface. Exceptions are reported via the <i>onError()</i> callback: 
+        </p>
+        <pre><code class="language-java">AsyncFileTransferClient client = new AsyncFileTransferClient();
+client.addErrorListener(this);</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

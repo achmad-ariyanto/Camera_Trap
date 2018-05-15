@@ -1,0 +1,29 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Selecting Ciphers</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 3," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Selecting Ciphers</h1>
+    <p>SSL and TLS can use a variety of encryption/decryption algorithms (called <i>ciphers</i>).  In a single secure connection, as many as four different ciphers may be used for various purposes; 
+        this set of ciphers is called a <i>cipher suite</i>.  Each party in a secure connection must designate which cipher suites it is going to support. When a new secure connection is made, the parties involved try to agree on which cipher suite to use.  There must be at least one cipher suite that is available on both sides of the connection for this to be possible.
+    </p>
+    <p>Different cipher suites have different levels of security and performance.  The lower the level of security, the easier the cipher is to break.  Unfortunately, stronger ciphers usually offer slower performance.
+        Hence, there is a certain level of trade-off between the two.  For this reason, the decision on which cipher suites to support is left to the developers and/or users of SSL and TLS applications.
+    </p>
+    <p>Every cipher suite has a standard name (e.g. TLS_RSA_WITH_RC4_128_SHA).  This name reveals which ciphers are used in the suite.</p>
+    <p>Some guidelines which may be useful when selecting cipher suites are:</p>
+    <ul>
+        <li>Triple DES offers high security but relatively poor performance (look for names with the characters, 3DES).</li>
+        <li>DES (not 3DES) can be cracked relatively easily</li>
+        <li>128-bit RC4 offers high performance and reasonable security (look for names with the characters RC4_128).</li>
+        <li>SHA is preferable to MD5 (choose algorithms whose names ending with SHA ahead of those ending with MD5).</li>
+        <li>Export version of algorithms are deliberately weakened; avoid them if possible (i.e. avoid 40-bit  suites).</li>
+    </ul>
+    <p>Next: <a href="socksproxies.html">SOCKS Proxies</a></p>
+</body>
+</html>
+

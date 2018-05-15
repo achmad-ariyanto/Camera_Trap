@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <title>How to upload, download and delete a file</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </HEAD>
+    <BODY>
+        <h1>How to upload, download and delete a file</h1>
+        <p>Uploading, downloading and deletion of files is all done through simple method calls on the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a> class. All methods described below are also supported in the 
+            <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, 
+            <a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html">ProFTPClient</a> and 
+            <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a> classes.
+        </p>
+        <h4>Uploading Files</h4>
+        <p>Uploading of a file is done by the following method-call:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#put(java.lang.String,%20java.lang.String)">put(localFilePath, remoteFileName)</a>;</code></pre>
+        <p>This method uploads the file specified by the first argument and saves it on the server with the name specified by the second
+            argument. If the file is already present on the server then it is usually overwritten, though this depends on the server configuration.
+        </p>
+        <p>File appending is also supported, whereby the contents of the local file are appended to the end of the remote file. Appending is done by passing true as a third parameter to the put() method:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#put(java.lang.String,%20java.lang.String,%20boolean)">put(localFilePath, remoteFileName, true)</a>;</code></pre>
+        <h4>Downloading Files</h4>
+        <p>Downloading of a file is done by the following method-call:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#get(java.lang.String,%20java.lang.String)">get(localFilePath, remoteFileName)</a>;</code></pre>
+        <p>This method downloads the file specified by the second argument and saves it locally with the name specified by the first
+            argument. If the file is already present on the local storage medium then it is overwritten.
+        </p>
+        <h4>Deleting Files</h4>
+        <p>A file may be deleted by calling the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#delete(java.lang.String)">delete()</a> method.</p>
+        <h4>Notes:</h4>
+        <p>(1) It is often useful to transfer data directly to and from memory rather than files. The topic <a href= 
+            "howtotransferstreams.html">How to transfer streams and byte-arrays</a> explains how to do this.</p>
+        <script src="../js/prism.js"></script>    
+    </BODY>
+</HTML>
+

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (with the multi-protocol client)</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (with the multi-protocol client)</h1>
+        <p>The topic <a href="howtouseftpsintroduction.html">How to use FTPS (introduction)</a> and subsequent FTPS topics describe the FTPS features of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>.  
+            This topic demonstrates how <a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html">SecureFileTransferClient</a> can be used for FTPS.
+        </p>
+        <p>At the most basic level of FTPS, assuming that the remote host, user and password are set, all that is required is to set the protocol to FTPS_EXPLICIT, which is done via the <i>setProcotol</i>
+            method, as below: 
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html#setProtocol(Protocol)">setProtocol(Protocol.FTPS_EXPLICIT)</a>;
+ftp.connect();</code></pre>
+        <p>The code above, by default, does not perform server validation. Server validation should always be enabled for production machines, so that the wrong server is not communicated with. 
+            To validate the server, the <a href="certificatesandcertificateauthoritiescas.html">root certificates</a> file must be loaded, via the <i>loadSSLServerValidation</i> method: 
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html#loadSSLServerValidation(String)">loadSSLServerValidation(rootCertPath)</a>;
+ftp.connect();</code></pre>
+        <p>Numerous other SSL settings, including those for client validation, ciphers and server compatibility settings can be accessed via the 
+            <a href="../../api/com/enterprisedt/net/ftp/AdvancedSSLSettings.html">AdvancedSSLSettings</a> class, accessed by the <i>getAdvancedSSLSettings()</i> method. 
+        </p>
+        <p>Other configuration options are available via the <a href="../../api/com/enterprisedt/net/ftp/AdvancedFTPSettings.html">AdvancedFTPSettings</a> class, accessed by the <i>getAdvancedFTPSettings()</i> method, 
+            and the <a href="../../api/com/enterprisedt/net/ftp/AdvancedGeneralSettings.html">AdvancedGeneralSettings</a> class, accessed by the <i>getAdvancedSettings()</i> method. 
+        </p>
+        <p>All of these configuration options should be set before the <i>connect()</i> method is called. </p>
+        <h4>Example</h4>
+        <p>The following example illustrates the use of SecureFileTransferClient for explicit mode FTPS, using both client and server validation. Note that the client certificate must be registered with 
+            the server for client validation to work correctly. 
+        </p>
+        <pre><code class="language-java">// basic settings
+SecureFileTransferClient client = new SecureFileTransferClient();
+client.setRemoteHost(host);
+client.setUserName(user);
+client.setPassword(password);
+client.setProtocol(Protocol.FTPS_EXPLICIT);
+    
+// server validation
+client.loadSSLServerValidation(rootCert);
+    
+// client validation - set the client certificate details
+client.getAdvancedSSLSettings().setClientCertificatePath(keyFileName);
+client.getAdvancedSSLSettings().setClientCertificatePassphrase(keyFilePassword);
+    
+// connect
+client.connect();
+    
+// do stuff
+    
+// disconnect from server
+client.disconnect();</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

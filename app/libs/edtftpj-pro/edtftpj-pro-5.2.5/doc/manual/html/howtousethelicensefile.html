@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to use the license file</title>
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+	<script src="../js/prism.js"></script>
+</head>
+<body>
+    <h1>How to use the license file</h1>
+    <p>edtFTPj/PRO uses a license key to control access to the key classes. All key classes check that a valid license is available, otherwise an exception is thrown.</p>
+    <p>The license is supplied as either two strings (an <i>owner</i> string and <i>license</i> key), or as a <i>license.jar</i> file (for trial editions and for customers prior to 2.0.1).</p>
+    <p>The license is set via the setLicenseDetails() method in the <i>com.enterprisedt.util.license.License</i> class. This method should be called prior to using the API in your application. Its use is shown below:</p>
+    <pre><code class="language-java">License.setLicenseDetails("myownerstring","mylicensekey");</code></pre>
+    <p>If a <i>license.jar</i> is being used (e.g. for the trial edition), it must be in the CLASSPATH of the application using edtFTPj/PRO. The trial version includes a <i>license.jar</i> file with an expiry
+        date at least 30 days in the future.
+    </p>
+    <p>When you purchase the product, you will receive a permanent license consisting of the owner string and the license key. Use <i>License.setLicenseDetails("myownerstring", "mylicensekey")</i> to apply this license. Once this is done
+        the trial <i>license.jar</i> is no longer required. 
+	</p>
+    <p>If you prefer to continue using the license.jar format, you can edit it as follows:
+		<ol>
+		 <li>Rename license.jar to license.jar.zip</li>
+		 <li>Open license.jar.zip using a tool such as <a hrer="http://www.7-zip.org/download.html" target="_blank">7-zip</a> that allows you to edit files within zip files.</li>
+		 <li>Open <i>edtlicense.properties</i> for editing.</li>
+		 <li>Replace the license.owner value with your own "myownerstring", so you have "license.owner=myownerstring"</li>
+		 <li>Replace the license.key value with your own "mylicensekey".</li>
+		 <li>Close the zip file and rename back to license.jar.</li>
+		</ol>
+	</p>
+    <p>
+		You now should have a license.jar file containing your own license details which can be used instead of the trial license.jar.
+    </p>
+    <p>
+	If you use a trial <i>license.jar</i> after its expiry date, an exception will be thrown indicating that the license has expired.
+	</p>
+</body>
+</html>
+

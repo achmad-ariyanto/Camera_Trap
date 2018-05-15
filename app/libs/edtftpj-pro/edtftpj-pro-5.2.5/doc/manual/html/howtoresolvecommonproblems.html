@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to resolve common problems</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>How to resolve common problems</h1>
+        <p>Some commonly encountered problems and their resolution are described below. </p>
+        <p>Before you contact EDT Support, check this list and also go through the <a href="howtodiagnoseproblems.html">How to diagnose problems</a> topic. </p>
+        <ol>
+            <li>
+                <b>Unusual ClassCastExceptions</b>. When edtFTPj/PRO is used in application servers such as Tomcat or Weblogic, you may get unusual ClassCastExceptions. This is generally due to multiple classloaders. 
+                The edtFTPj/PRO jar file should only be located in one place on the application server. If it is located in a common library directory as well as an application context, this error is possible.
+            </li>
+            <li>
+                <b>ParseException using dirDetails()</b>. edtFTPj/PRO supports as many server directory listing formats as possible, however occasionally unknown formats arise. However this problem can also occur if the client is in 
+                a different locale to the server. edtFTPj/PRO cannot easily work out the locale of the server, and thus FTPClient.setParserLocale() can be used to force the client to use a particular server's locale.
+            </li>
+            <li>
+                <b>Signer information does not match</b>. edtFTPj/PRO's jar file is digitally signed. An error such as "class com.enterprisedt.net.ftp.FTPClient's signer information does not match signer information of other 
+                classes in the same package" generally indicates that an unsigned jar containing the same class has been loaded from the CLASSPATH. This is usually because edtFTPj's jar file is also in the CLASSPATH. 
+                Ensure that <b>edtftpj.jar</b> and <b>edtftpj-pro.jar</b> are not both in the CLASSPATH, i.e. remove <b>edtftpj.jar</b> from the CLASSPATH.
+            </li>
+            <li>
+                <b>Failing to create sockets (IOException)</b>. Generally, applications have a limit to the number of sockets they can have open simultaneously (in Unix this is controlled via ulimit). 
+                This wouldn't be a problem if sockets disappeared as soon as they were closed. In TCP/IP, however, when sockets are closed they enter the TIME_WAIT state. The socket stays in this state long enough to 
+                let stray TCP packets for this connection expire - usually up to 2 minutes. Since every data transfer and directory listing uses a new socket, if a large number of transfers are performed quickly, 
+                the number of sockets in TIME_WAIT can build up rapidly and the application run out of sockets. There are various solutions. The length of time a socket is in TIME_WAIT can be decreased (not a good idea 
+                generally). The number of sockets available to an application can be increased via ulimit (Unix) or via the MaxUserPort registry parameter (Windows). Preferably, it is best to space out transfers a little 
+                so sockets have a chance to expire from TIME_WAIT, or catch the exception, sleep and retry repeatedly.  
+            </li>
+        </ol>
+        <h4>How to contact support</h4>
+        <p>See <a href="support.html">here</a> for details on contacting support. Please ensure all the requested items are included.</p>
+    </body>
+</html>
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to transfer using FTP streams</title>
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>How to transfer using FTP streams</h1>
+    <p>Sometimes it is useful to be able to read from or write to the FTP server as if it were a InputStream or OutputStream. This is possible using 
+        <a href="../../api/com/enterprisedt/net/ftp/FTPInputStream.html">FTPInputStream</a> and 
+        <a href="../../api/com/enterprisedt/net/ftp/FTPOutputStream.html">FTPOutputStream</a>, and 
+        <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPInputStream.html">SSHFTPInputStream</a> and 
+        <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPOutputStream.html">SSHFTPOutputStream</a>.
+        These classes directly Java's InputStream and OutputStream, and can be used in exactly the same manner.
+    </p>
+    <p>An instance of <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a>, 
+        <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, or
+        <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a> or a
+        subclass must be supplied to the stream's constructor. The InputStreams have an optional parameter for an offset to begin reading from, which is only applicable for binary transfers. The streams can only be
+        used for one data transfer. As is standard for streams, it is essential that the stream is closed when the transfer is complete, even if an exception was thrown. This is best done in a <i>finally</i> block 
+        as soon in the example below. Otherwise, resources may not be correctly cleaned up.
+    </p>
+    <p>All of the stream's transfer parameters are taken from the FTP client instance that is supplied to the constructor. For example, if the stream is to be a binary
+        mode transfer, binary mode must be set in the instance before it is supplied to the constructor.
+    </p>
+    <p>The following shows how an <a href="../../api/com/enterprisedt/net/ftp/FTPInputStream.html">FTPInputStream</a> can be used to download a file:</p>
+    <pre><code class="language-java">FTPInputStream in = new FTPInputStream(ftp, "myfile.zip");
+BufferedOutputStream out = null;
+byte[] chunk = new byte[4096];
+int count = 0;
+try {
+out = new BufferedOutputStream(new FileOutputStream("myfile.zip"));
+while ((count = in.read(chunk)) >= 0) {
+    out.write(chunk, 0, count);
+}
+}
+finally {
+try {
+    in.close();
+}
+catch (Exception ex) {
+    ex.printStackTrace();
+}
+if (out != null) {
+    try {
+        out.close();
+    }
+    catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+}</code></pre>
+    <p>Streams can be especially useful when a large file is being downloaded and the stream needs to be processed as it arrives. For example, if an XML file was being downloaded, a
+        SAX parser could parse the stream.
+    </p>
+    <script src="../js/prism.js"></script>    
+</body>
+</html>
+

@@ -1,0 +1,2133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+    <head>
+        <title>edtFTPj/PRO Revision History</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>edtFTPj/PRO Revision History</h1>
+        <TABLE cellspacing="0" cellpadding="5" width="100%" border="1" style="border-collapse:collapse">
+            <TR bgcolor=#E3E3E3>
+                <TD align="center" nowrap>
+                    <B>Version</B>
+                </TD>
+                <TD align="center">
+                    <B>Description</B>
+                </TD>
+            </TR>
+			<TR>
+                <TD align="center">
+                    Version 5.2.5<BR>(1 May, 2018)
+                </TD>
+                <TD width="70%">
+                    <UL>
+						<li>
+                          Convert Developer's Guide to new HTML format.
+                        </li>
+						<li>
+                          Add ability to set a minimum TLS version.
+                        </li>
+                        <li>
+                          Fix bug where Java connection pool opened unlimited connections (happened when
+						  deleting an entire directory).
+                        </li>
+						<li>
+                          Fix bug in SSHFTPOutputStream (Failed when the remote file being written to did not exist previously).
+                        </li>
+                        <li>
+                          Send client SSH version string immediately on connection to the server (instead of
+						  waiting for the server to send its version string).   
+                        </li>
+						<li>
+                          Minimum Java version supported is now 1.5.    
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.2.4<BR>(27 October, 2017)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Modify reading of FTP replies to trim garbage characters prior to reply code.
+                        </li>
+                        <li>
+                            Fix for SSH/SFTP server sending back corrupt file attribute messages. Now
+                            ignores errors and sets defaults instead of failing.
+                        </li>
+                        <li>
+                            Deprecate use of SSH_MSG_KEX_DH_GEX_REQUEST_OLD in SSH/SFTP - some servers fail the key exchange otherwise.
+                        </li>
+                        <li>
+                            Fix for keepAlive() for FTP servers that forbid NOOP.
+                        </li>
+                        <li>
+                            Fix bug in dirDetails() where getPath() was not including the filename.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.2.3<BR>(12 May, 2017)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Another TLS 1.2 fix for servers that only accept SHA256 signature algorithms.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.2.2<BR>(8 March, 2017)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Fix TLS 1.2 issue - now sends the SignatureAlgorithms extension if TLS 1.2 
+                            is one of the protocol versions presented by the client. Apparently required 
+                            for Microsoft IIS. 
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.2.1<BR>(25 November, 2016)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Fix bug in TLS 1.2 where an error message "Unsupported hash or sig" is logged.
+                        </li>
+                        <li>
+                            Fix ProFTPClient bug where proxy functionality was disabled.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.2.0<BR>(9 November, 2016)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Add support for some SHA-256 ciphers in TLS: TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,
+                            TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256,
+                            TLS_RSA_WITH_AES_128_CBC_SHA256.
+                        </li>
+                        <li>
+                            Fix DHE (Diffie-Helman Ephemeral) cipher usage for TLS 1.2.
+                        </li>
+                        <li>
+                            Fix memory leak in SecureFileTransferClient.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.1.0<BR>(11 July, 2016)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            IPv6 now supported for FTPS as well as FTP.
+                        </li>
+                        <li>
+                            setDetectTransferMode is now disabled by default for SFTP (i.e. it
+                            is now doing what the Javadoc says).
+                        </li>
+                        <li>
+                            In TLS 1.2 the optional list of signature/hash combinations is now sent to
+                            the server, and RSA/SHA256 is now included.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.0.1<BR>(4 March, 2016)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Added setMaxSSLVersion.
+                        </li>
+                        <li>
+                            Fixed bug in TLS 1.2 client certificate verification.
+                        </li>
+                        <li>
+                            Fix to dir list - ignore socket creation exception if empty directory.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 5.0.0<BR>(14 January, 2016)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Now supports TLS 1.2.
+                        </li>
+                        <li>
+                            Now uses the default OS settings for SO_SNDBUF and SO_RCVBUF unless explicitly
+                            set by setNetworkBufferSize().
+                        </li>
+                        <li>
+                            Fix bug with setDisableChModAfterCreateDir().
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.8.1<BR>(4 September, 2015)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Support for SHA-384 signed certificates.
+                        </li>
+                        <li>
+                            Added dirDetailsM() for listing using MLSD to SSLFTPClient.
+                        </li>
+                        <li>
+                            Removed dependence on java.security.Security.getAlgorithmProperty (which is deprecated).
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.8.0<BR>(10 July, 2015)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            Added new HMACS for SSH/SFTP: hmac-sha2-512, hmac-sha2-256.
+                        </li>
+                        <li>
+                            Added new key exchange algorithm for SSH/FTP: diffie-hellman-group-exchange-sha256.
+                        </li>
+                        <li>
+                            Added support for reading PKCS#8 formatted private keys in client certificates.
+                        </li>
+                        <li>
+                            Fix executeCommand so that it doesn't fail if remote process writes to stderr but succeeds.
+                        </li>
+                        <li>
+                            MVSFileParser fixes.
+                        </li>
+                        <li>
+                            Fix NullReferenceException in FTP passive mode.
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.7.0<BR>(23 January, 2015)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            TLS 1.1 implemented (SSL 3.2).
+                        </li>
+                        <li>
+                            Set MAX_CERTIFICATE_CHAIN_LENGTH to 4 by default.
+                        </li>
+                        <li>
+                            Fixed scripting engine bug to ensure quit() is called for IOExceptions..
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.6.2<BR>(29 October, 2014)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <li>
+                            SSL 3.0 is now disabled by default for FTPS. This was motivated by
+                            the <a href="http://en.wikipedia.org/wiki/POODLE" target="_blank">POODLE vulnerability</a> 
+                            in SSL 3.0.
+                        </li>
+                        <li>
+                            Added setParallelWriteMode() to AdvancedSSHProperties (so it can be disabled).
+                        </li>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.6.1<BR>(2 July, 2014)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed bug with ProFTPClient and recursive transfers ("hostname can't be null" error). 
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Documentation fixes. 
+                            </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.6.0<BR>(26 May, 2014)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Set the server supplied long name in SFTP as the raw string in FTPFile rather than constructing it.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Changed transfers so that connection and handshake in passive mode is done 
+                            <i>after</i> sending the command and prior to reading the reply. We found a 
+                            server that requires this.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Added support for SHA-256/RSA/PKCS#1 certificates.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Added SSHClient ConfigFlags to AdvancedSSHSettings  so they are available in SecureFileTransferClient.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Renew JCE certificate for another 5 years.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            DeleteOnFailure now set to false by default.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in FTPInputStream/SSHFTPInputStream (which was causing the connection 
+                            in SecureFileTransferClient to not be freed after closing stream).
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Make reading of FTP replies more robust (copes better with nonsense).
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Fix rekey failure with Globalscape.
+                            </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.5.0<BR>(1 July, 2013)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Improve performance of SecureFileTransferClient in retrieving connections from pool.</FONT>
+                        </LI>
+                        <LI>
+                            SSLFTPClient.setClientCertificate now allows a certificate chain to be supplied.</FONT>
+                        </LI>
+                        <LI>
+                            Add SSHFTPKeyException.</FONT>
+                        </LI>
+                        <LI>
+                            Don't load certificates with SHA384withECDSA public keys in SSLFTPCertificateStore (instead of failing).</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug in reconnect() method for implicit mode (was calling auth()).</FONT>
+                        </LI>
+                        <LI>
+                            Fix SSLCertificateVerify from throwing a ClassCastException.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.4.0<BR>(19 December, 2012)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added setNetworkBufferSize() to SecureFileTransfer client and SSHFTPClient</FONT>
+                        </LI>
+                        .
+                        <LI>
+                            Allow SOCKS5 authentication without username and password.</FONT>
+                        </LI>
+                        <LI>
+                            Improved performance of binary input streams. Implement skip(), mark() and reset() for FTPInputStream and SSHFTPInputStream.</FONT>
+                        </LI>
+                        <LI>
+                            Catch tryLock() exceptions and ignore them. Add flag to avoid using tryLock().</FONT>
+                        </LI>
+                        <LI>
+                            Fixed setRemotePort order bug for SFTP. If setRemotePort was called before setProtocol(Protocol.SFTP) then the 
+                            port was reset to 22.</FONT>
+                        </LI>
+                        <LI>
+                            Increased SSH minimum window size to 32K, up from 1K as this occasionally caused problems.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.3.0<BR>(8 October, 2012)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed hostname checking with FTPS when presented with a wildcard certificate.</FONT>
+                        </LI>
+                        <LI>
+                            Added diffie-hellman-group14-sha1 to SSH key exchange algorithms.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed invalid host signature which can occur when rekeying in SSH if a non-standard port is used.</FONT>
+                        </LI>
+                        <LI>
+                            Fix to cope with bug in Maverick server library when listing directories - Maverick returns empty SSH_FXP_NAME
+                            messages which are now treated as if they were SSH_FXP_STATUS messages.</FONT>
+                        </LI>
+                        <LI>
+                            Add existsDirectory method to SecureFileTransferClient.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.2.0<BR>(29 May, 2012)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for aes128-ctr, aes192-ctr and aes256-ctr ciphers to SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in multiple put & get methods where if the full remote path was supplied, it ended up in the parent.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.1.0<BR>(13 February, 2012)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added resumeNextDownload(long) to SSHFTPClient, SSLFTPClient and FTPClient so that partial downloads can be done.</FONT>
+                        </LI>
+                        <LI>
+                            Added isControlSecure() method to SSLFTPClient to determine if the control connection is secure.</FONT>
+                        </LI>
+                        <LI>
+                            Oops. Put hmac-sha1 back as the first HMAC chosen.</FONT>
+                        </LI>
+                        <LI>
+                            Apply timeout to message store retrieval on connect().</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 4.0.0<BR>(30 November, 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for zlib@openssh.com compression (delayed compression).</FONT>
+                        </LI>
+                        <LI>
+                            Algorithm settings for SSH now apply only for the particular SSHFTPClient or SecureFileTransferClient instance
+                            that they are set on (previously were static properties). WARNING: if you are using the enable/disable methods on
+                            SSHFTPAlgorithm explicitly, this is a breaking change!</FONT>
+                        </LI>
+                        <LI>
+                            Added support for FTPS servers that require logging in prior to PBSZ/PROT.</FONT>
+                        </LI>
+                        <LI>
+                            Added 'type' command to the script engine. </FONT>
+                        </LI>
+                        <LI>
+                            Apply timeout to getting a connection from the connection pool. </FONT>
+                        </LI>
+                        <LI>
+                            Deprecated SSLFTPClient constructors now use a non-zero default timeout (which is the same as
+                            the default constructor timeout). </FONT>
+                        </LI>
+                        <LI>
+                            Add setCheckDirReadableForChDir() to SSHFTPClient. </FONT>
+                        </LI>
+                        <LI>
+                            Fix so that IBM JVMs support AES encrypted private keys. </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.9.1<BR>(23 August, 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fix so FTP shell supports filenames with spaces (in double quotes). </FONT>
+                        </LI>
+                        <LI>
+                            Fixed problem where bytesTransferred isn't called at completion of transfer in SecureFileTransferClient for
+                            small files. </FONT>
+                        </LI>
+                        <LI>
+                            Minimize logging when waiting in loop for window adjust from server, and throw exception if window stopped.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.9.0<BR>(19 July, 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added SSHFTPClient.fileDetails(). </FONT>
+                        </LI>
+                        <LI>
+                            Added lcd (local directory change) to FTP scripting. </FONT>
+                        </LI>
+                        <LI>
+                            Added support for GeneralizedTime in ASN.1 certificate parsing (fixes "Not a UTC_TIME" exception). </FONT>
+                        </LI>
+                        <LI>
+                            Fixed integer overflow problem in file upload when the SSH remote window size is greater than MAX_INT. </FONT>
+                        </LI>
+                        <LI>
+                            Made local channel counter static so channel number doesn't restart at 0.</FONT>
+                        </LI>
+                        <LI>
+                            Change obfuscator (now Proguard), and changed obfuscation so that obfuscated class names are different independent of case (as having two
+                            names that are the same other than case doesn't work in JBoss, which is buggy)</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.8.1<BR>(24 May, 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for using ACCT in SecureFileTransferClient and FileTransferClient. </FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient.delete() now throws an exception if a directory is supplied. </FONT>
+                        </LI>
+                        <LI>
+                            Fixed SSHFTPClient.keepAlive() so it gets a response from the server. </FONT>
+                        </LI>
+                        <LI>
+                            Removed 2GB resume limit from SFTP. </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.8.0<BR>(7 April 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for AES encrypted private keys (would receive an error message like 
+                            'Algorithm AES-128-CBC not recognized' previously). </FONT>
+                        </LI>
+                        <LI>
+                            Added support for multiple AVAs of each type in SSL/TLS certificates. Resolves exception
+                            thrown parsing certificates "Multiple AVAs found in an RDN". 
+                        </LI>
+                        <LI>
+                            SFTP parallel mode fix to eliminate locking.</FONT>
+                        </LI>
+                        <LI>
+                            importDefaultKeyStore() now uses "javax.net.ssl.trustStore" property to locate the key store, and 
+                            if not found tries lib/security/jssecerts and then lib/security/cacerts.</FONT>
+                        </LI>
+                        <LI>
+                            FTPFile.getPath() should not include the filename, only the directory, for all protocols.
+                            This includes FTPFile objects returned from dirDetails() and fileDetails().</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in MLST parser. FTPFile path no longer includes the filename to make consistent with dirDetails().</FONT>
+                        </LI>
+                        <LI>
+                            If MLST not supported fileDetails() now falls back to SIZE and MDTM.</FONT>
+                        </LI>
+                        <LI>
+                            Return an empty array of features if FEAT returns no features (but is implemented 
+                            by the server). Tweak array so only actual features are returned.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.7.0<BR>(7 February 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for diffie-hellman-group-exchange-sha1 for SSH/SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Added SSHFTPAlgorithm.CIPHER_ARCFOUR.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug re reading multi-line replies.</FONT>
+                        </LI>
+                        <LI>
+                            Connection pool mods to check a connection is valid once removed from pool.</FONT>
+                        </LI>
+                        <LI>
+                            Fix keepAlive() in SSHFTPClient so that it throws an exception when called if disconnected.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.6.1<BR>(19 January 2011)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed resume bug (introduced in 3.6.0).</FONT>
+                        </LI>
+                        <LI>
+                            Trim spaces in front of FTP reply codes. </FONT>
+                        </LI>
+                        <LI>
+                            Added OS/400 directory listing parser. </FONT>
+                        </LI>
+                        <LI>
+                            Added setRemoteEOL() to AdvancedSSHSettings.</FONT>
+                        </LI>
+                        <LI>
+                            Added changeIntoPathDirectory(boolean) to prevent the default behaviour of
+                            changing into the directory if a remote path is supplied instead of a filename.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.6.0<BR>(21 December 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Add arcfour to list of supported ciphers for SSH/SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Make Blowfish the default cipher for SSH/SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Ensure that "." and ".." don't appear in listings that use wildcards.</FONT>
+                        </LI>
+                        <LI>
+                            Added RollingFileAppender.</FONT>
+                        </LI>
+                        <LI>
+                            Added a system property to add a prefix to all edtFTPj/PRO loggers (for use with log4j).</FONT>
+                        </LI>
+                        <LI>
+                            Tweaks to UnixFileParser for some unusual formats.</FONT>
+                        </LI>
+                        <LI>
+                            Don't throw an exception if SSH_MSG_IGNORE message body has an invalid length.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.5.0<BR>(16 September, 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fix bug where the attributes sent with FXP_OPEN were being corrupted, potentially resulting
+                            in bizarre timestamps on remote files.</FONT>
+                        </LI>
+                        <LI>
+                            In SSHFTPValidator, include hashed host names in getKnownHostKeys() and getKnownHosts().</FONT>
+                        </LI>
+                        <LI>
+                            Improve IPv6 support.</FONT>
+                        </LI>
+                        <LI>
+                            Fix problem with directory listings when there is permission problems.</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug with wildcard directory names and symlink names.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.4.1<BR>(1 July, 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            If FXP_OPEN fails don't send attributes (fixes potential permissions problem when uploading a new file 
+                            introduced in 3.4.0).</FONT>
+                        </LI>
+                        <LI>
+                            Permit 232 code to be returned from USER command.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.4.0<BR>(9 June, 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Add ability to abort listings when using a callback. </FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in reading extended file attributes (see 3.2.0 - it wasn't fixed there). </FONT>
+                        </LI>
+                        <LI>
+                            Fixed potential SFTP hang in State.waitForState(). </FONT>
+                        </LI>
+                        <LI>
+                            Fixed Android "HeapWorker is wedged" problem in SftpFileInputStream.finalize(). </FONT>
+                        </LI>
+                        <LI>
+                            Fix "Unsupported operation" error when sending FXP_OPEN (don't send
+                            attributes).
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.3.0<BR>(29 April, 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Add callback allowing each entry returned from dirDetails and listDirectory to be processed
+                            one by one, without creating a list of all entries. Useful for very large listings
+                            where memory could be a problem.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug where when autoPassiveIPSubstitution is used with proxies, it can result in
+                            the incorrect IP address being used.</FONT>
+                        </LI>
+                        <LI>
+                            Fix CRC mismatch bug because of leading zeros in CRC.</FONT>
+                        </LI>
+                        <LI>
+                            Add 'set acct' to ScriptEngine so that the ACCT command can be used.</FONT>
+                        </LI>
+                        <LI>
+                            Mask argument to ACCT in logging.</FONT>
+                        </LI>
+                        <LI>
+                            Fix progress monitor bug in SecureFileTransferClient.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.2.0<BR>(31 March, 2010)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            New JCE code signing certificate from Sun valid for 5 years. </FONT>
+                        </LI>
+                        <LI>
+                            Fixed resume download bug where if resume() is called twice, firstly on an existing file, and then
+                            when there is no local file, the second download also resumes. </FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP problem with hang in ChannelDataWindow.waitForWindowSpace() when an exception had 
+                            been thrown in the message transport. </FONT>
+                        </LI>
+                        <LI>
+                            Extra SSHFTPClient authentication method permitting order of publickey then password auth to be swapped. </FONT>
+                        </LI>
+                        <LI>
+                            Added SSHFTPClient.setAuthenticationChangePassword, allowing the password to be
+                            changed while authenticating - easier to user than using PasswordChanger. </FONT>
+                        </LI>
+                        <LI>
+                            Added proxy package Javadoc to distribution. </FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP bug where extended attributes weren't read for SSH_FXP_NAME.</FONT>
+                        </LI>
+                        <LI>
+                            Add Information Exchange listing parser.</FONT>
+                        </LI>
+                        <LI>
+                            Add Netware listing parser.</FONT>
+                        </LI>
+                        <LI>
+                            Scripting language now allows the parser to be explicitly set.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.1.2<BR>(6 November, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for AES encrypted private keys (would receive an error message like 
+                            'Algorithm DES-EDE3-CFB not recognized' previously). </FONT>
+                        </LI>
+                        <LI>
+                            Added support for client authentication in FTPS for SecureFileTransferClient. </FONT>
+                        </LI>
+                        <LI>
+                            Fix end of line terminator bug in FTPInputStream. If Unix EOL terminators were read, they 
+                            were stripped, which is incorrect.</FONT>
+                        </LI>
+                        <LI>
+                            Name resolution is not attempted when using proxies.</FONT>
+                        </LI>
+                        <LI>
+                            Implemented getServerCertificate() for implicit mode FTPS.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug where a non-public certificate exception was being thrown. </FONT>
+                        </LI>
+                        <LI>
+                            Don't throw an exception if SSH_MSG_IGNORE message body fails to be parsed. </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.1.1<BR>(8 September, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Remove state checks in signature classes (state should be updated and checked in 
+                            java.security.Signature, and it appears that on some IBM JVMs, the state
+                            variable is not correctly updated). If state checks are removed in subclasses
+                            it all works fine.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for CCC in SecureFileTransferClient.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for setting the certificate common name in SecureFileTransferClient.</FONT>
+                        </LI>
+                        <LI>
+                            EventListener now called correctly in SecureFileTransferClient for downloadMultiple & uploadMultiple.
+                            Fixed problems with bytesTransferred.</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient now supports FTPProgressMonitorEx.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in mput() where if the remote dir was ".", an unnecessary CDUP was performed.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in FTPClient where the PORT command sent 0.0.0.0 to the server.</FONT>
+                        </LI>
+                        <LI>
+                            If launching SFTP subsystem fails, tries manual exec.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed NullPointerException being thrown from SshFxpOpen.constructByteArray during a put, which occurred when
+                            a server returned a null permissions string from FXP_STAT.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.1.0<BR>(23 July, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Significant speed improvements for SFTP uploads.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for HTTP proxies for all protocols.</FONT>
+                        </LI>
+                        <LI>
+                            Improved support for SOCKS proxies for all protocols.</FONT>
+                        </LI>
+                        <LI>
+                            Now permits banner preceding remote SFTP version string.</FONT>
+                        </LI>
+                        <LI>
+                            Made exists() method more reliable for FTP/FTPS.</FONT>
+                        </LI>
+                        <LI>
+                            Note - now supports Java 1.4 and above.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.0.3<BR>(25 June, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added downloadURLStream and downloadURLFile.</FONT>
+                        </LI>
+                        <LI>
+                            Added setPrivateKeyInputStream and setPrivateKeyBytes to AdvancedSSHSettings.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed problem whereby FTP server errors such as 452 are accepted in non-strict reply checking mode.</FONT>
+                        </LI>
+                        <LI>
+                            Made auto passive IP substition on by default.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed problem whereby an SFTP server was not appending because of the flags sent.</FONT>
+                        </LI>
+                        <LI>
+                            Throw an exception in SFTP if creating a directory that already exists.</FONT>
+                        </LI>
+                        <LI>
+                            Now throws FTPTransferCancelledException when uploads are cancelled in FTP/FTPS.</FONT>
+                        </LI>
+                        <LI>
+                            Minor file parsing bug fixes.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.0.2<BR>(11 May, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Modify changing directory so that SSH_FXP_REALPATH failures don't fail the operation
+                            if the directory does exist.</FONT>
+                        </LI>
+                        <LI>
+                            Fix control channel encoding bug for FTPS and SFTP.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.0.1<BR>(17 April, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Add better methods to SSHFTPValidator for obtaining host public keys.</FONT>
+                        </LI>
+                        <LI>
+                            Add support for SSH_MSG_USERAUTH_PASSWD_CHANGEREQ, i.e. dynamically changing 
+                            the password on the SSH server.</FONT>
+                        </LI>
+                        <LI>
+                            Add ability to intercept and modify the server response to the PASV command (so that 
+                            a different host or port number can be substituted).</FONT>
+                        </LI>
+                        <LI>
+                            Fix CRC comparison bug re file integrity checking.</FONT>
+                        </LI>
+                        <LI>
+                            Fix certificate parsing code to allow zero length encoded strings.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 3.0.0<BR>(20 March, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Add support for MODE Z for FTP and FTPS transfers, enabling on the fly compression
+                            when connecting to servers supporting MODE Z.</FONT>
+                        </LI>
+                        <LI>
+                            Add integrity checking for FTP and FTPS transfers when connecting to servers that
+                            support XCRC or SIZE.</FONT>
+                        </LI>
+                        <LI>
+                            Add 'configflags' as a variable to the script engine so that the SSLFTPClient 
+                            configuration flags can be applied.</FONT>
+                        </LI>
+                        <LI>
+                            Add ability to throttle transfer rate to a set maximum bytes/sec.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.1.3<BR>(13 February, 2009)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Ignore errors from FX_STAT while listing directories. Some directories on some servers
+                            (such as '/') seem to permit listing but return "File does not exist" when FX_STAT-ed.</FONT>
+                        </LI>
+                        <LI>
+                            Restrict size of FXP_WRITE data block to max packet size.</FONT>
+                        </LI>
+                        <LI>
+                            Fix SecureFileTransferClient hang when connect() fails in some situations.</FONT>
+                        </LI>
+                        <LI>
+                            Fix SecureFileTransferClient hang when uploadByteArray() fails.</FONT>
+                        </LI>
+                        <LI>
+                            Make directory listing in SFTP smarter (if a composite path is supplied).</FONT>
+                        </LI>
+                        <LI>
+                            Fix for Korean months in UnixFileParser.</FONT>
+                        </LI>
+                        <LI>
+                            Tweaks to retry functionality.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.1.2<BR>(25 November, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed problem where server replies were ended with \n rather than \r\n (which is standard). This
+                            caused problems initially connecting. Now permits \n to end lines in server replies.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.1.1<BR>(18 November, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            ScriptEngine now correctly returns 0 exit status for successful execution, 1 otherwise.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for unicode ASN.1 string type in SSL certificates (solves "Not a PrintableString or IA5String or UTFString" error)
+                            </FONT>
+                        </LI>
+                        <LI>
+                            FTPException.toString() now includes the reply code if it exists.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP problem where client was hanging transfering a file to WinSSHD. This was due to the client trying to send more
+                            data than was available in the server's data window. If the server increased the window but it was still less than 
+                            the size of the data block, the client hung.
+                            </FONT>
+                        </LI>
+                        <LI>
+                            Fixed problem where server replies had embedded \r chars. This meant it was wrongly thought
+                            that the reply was complete, when in fact more was to come (resulting in out of order replies
+                            further along).</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.1.0<BR>(24 September, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fix OpenSSH public key parsing so that comments are optional, not required.</FONT>
+                        </LI>
+                        <LI>
+                            Now supports OpenSSH private key files encrypted using DES-EDE3-CFB.</FONT>
+                        </LI>
+                        <LI>
+                            Added ability to disable rekeying after 1 GB for SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSHFTPClient.dirDetails() where the permissions string was not being returned.</FONT>
+                        </LI>
+                        <LI>
+                            Added setPermissions() to SecureFileTransferClient and AsyncFileTransferClient.</FONT>
+                        </LI>
+                        <LI>
+                            Added 'quote' and 'site' commands to scripting language.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug where control socket isn't closed if connect succeeds but initial commands fail, or handshake fails.</FONT>
+                        </LI>
+                        <LI>
+                            Refactored directory listing parsing.</FONT>
+                        </LI>
+                        <LI>
+                            Add FTPFile.isFile().</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in FTPInputStream.read() and SSHFTPInputStream.read().</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug in Logger where edtftp.log.level property is not set correctly.</FONT>
+                        </LI>
+                        <LI>
+                            Print out CodeSource in logging.</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug applying umask to permissions in SFTP.</FONT>
+                        </LI>
+                        <LI>
+                            Use FXF_TRUNC when creating a new file (some servers insist on it).</FONT>
+                        </LI>
+                        <LI>
+                            Add DISABLE_CHMOD_AFTER_CREATE_DIR config flag for SSHFTPClient, for disabling setting permissions on a 
+                            directory that has just been created (on rare occasions problematic).</FONT>
+                        </LI>
+                        <LI>
+                            For resuming uploads, now send SIZE prior to establishing data socket.</FONT>
+                        </LI>
+                        <LI>
+                            Implement automatic retry for FTP/S transfers.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.0.1<BR>(13 June, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed bug where any strings added to the FileNotFoundStrings, DirectoryEmptyStrings and TransferCompleteStrings
+                            instances obtained via getAdvancedFTPSettings().setFileNotFoundMessages() etc were not applied.</FONT>
+                        </LI>
+                        <LI>
+                            Now includes an FTP command shell, that allows real-time development of FTP scripts for FTPS, SFTP and FTP. Connect
+                            to and control any FTP server on the command-line.</FONT>
+                        </LI>
+                        <LI>
+                            Added methods to save the known_hosts data to file.
+                        </LI>
+                        <LI>
+                            Added support for OpenSSH 4.0 hashed hostnames in known_hosts file.
+                        </LI>
+                        <LI>
+                            By default port numbers are now included in entries in known_hosts file 
+                            if they are non-standard (i.e. not port 22) in the format [hostname]:port.
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 2.0.0<BR>(23 May, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            SecureFileTransferClient released. Supports all protocols in a single class, and permits switching protocols with a single method call.
+                            Supports multiple, simultaneous transfers via FTP connection pools.</FONT>
+                        </LI>
+                        <LI>
+                            AsyncFileTransferClient released. Supports background transfers via a comprehensive asynchronous API.
+                            Permits multi-threaded performance without multi-threaded programming.</FONT>
+                        </LI>
+                        <LI>
+                            Added ARC4 alias for RC4.</FONT>
+                        </LI>
+                        <LI>
+                            In active mode, cycles through available ports if socket creation fails for a transfer.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.7<BR>(3 April, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed potential hang when SSH_MSG_USERAUTH_BANNER arrives during authentication AND the server terminates the connection.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for PuTTY private keys for SFTP public key authentication.</FONT>
+                        </LI>
+                        <LI>
+                            Added FTPConnectionClosedException, thrown when a 421 reply is received.</FONT>
+                        </LI>
+                        <LI>
+                            Added a new setAuthentication() method to SSHFTPClient that allows first publickey then password authentication.</FONT>
+                        </LI>
+                        <LI>
+                            Added SCPClient with basic get() and put() methods.</FONT>
+                        </LI>
+                        <LI>
+                            Added executeCommand().</FONT>
+                        </LI>
+                        <LI>
+                            "Unexpected null reply" error message changed to a more informative message.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.6<BR>(14 January, 2008)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Reading of known_hosts file now logs a warning for unrecognized key formats and
+                            continues reading the file (rather than throwing an exception).</FONT>
+                        </LI>
+                        <LI>
+                            Add setListenOnAllInterfaces(boolean) flag to stop active mode
+                            listening on all interfaces (all interfaces is the default).</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug whereby supplying a single argument to the ScriptEngine (i.e. the script) failed.</FONT>
+                        </LI>
+                        <LI>
+                            Add dataports variable to scripting, so that an active port range can be set in a script.</FONT>
+                        </LI>
+                        <LI>
+                            Add 'connect' as a synonym for 'open' in the scripting language.</FONT>
+                        </LI>
+                        <LI>
+                            SSH fix to ignore failed chmod after upload - fix to this fix from 1.5.1.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.5<BR>(8 November, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            In dirDetails() now English is always tried first for date parsing locale, followed
+                            by the default locale. Other locales can also be specified. Also, date parsing exceptions are no longer
+                            propagated - the relevant field is now set to null.</FONT>
+                        </LI>
+                        <LI>
+                            For SFTP, made 3des-cbc the default cipher (instead of Blowfish).</FONT>
+                        </LI>
+                        <LI>
+                            Support for FXP server-to-server transfers added for FTP.</FONT>
+                        </LI>
+                        <LI>
+                            Added DISABLE_WAIT_FOR_CHANNEL_CLOSE config flag to SSHFTPClient, so that 
+                            waiting for an acknowledgement from the server for a channel close request can be skipped.</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug whereby server messages not logged from the ScriptEngine when an unexpected reply is sent.</FONT>
+                        </LI>
+                        <LI>
+                            Fix incorrect line terminator in ScriptEngine output.</FONT>
+                        </LI>
+                        <LI>
+                            Add -c option to ScriptEngine so that a separate configuration file can be used for 'set' commands.</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug in SSHFTPClient.put(InputStream srcStream) - upload count was not incremented.</FONT>
+                        </LI>
+                        <LI>
+                            Permit close() to be called multiple times on FTPInput/Outputstream and SSHFTPInput/Outputstream.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.4<BR>(15 August, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            ScriptEngine.executeScript() now returns ScriptResult.</FONT>
+                        </LI>
+                        <LI>
+                            Fix dirDetails() bug whereby an incorrect separator was used when setting FTPFile.setPath()</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug which could cause an exception in SSLFTPCertificateStore.exportKeyStore().</FONT>
+                        </LI>
+                        <LI>
+                            Fix bug arising when certificate common name checking is disabled (FTPS).</FONT>
+                        </LI>
+                        <LI>
+                            Fix SFTP bug with RSA private keys - authentication would fail randomly.</FONT>
+                        </LI>
+                        <LI>
+                            Add ScriptResult class, which is returned from ScriptEngine.executeScript().</FONT>
+                        </LI>
+                        <LI>
+                            Add client and server validation to the ScriptEngine for FTPS.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.3<BR>(18 July, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Ignore FTPException from size() if resume is being tried for an upload 
+                            (which occurs if the file does not exist).</FONT>
+                        </LI>
+                        <LI>
+                            Added SSHFTPInputStream and SSHFTPOutputStream.</FONT>
+                        </LI>
+                        <LI>
+                            Added setForceUniqueNames() so that STOU always gets used.</FONT>
+                        </LI>
+                        <LI>
+                            Fix in parsing code for Connect:Enterprise UNIX.</FONT>
+                        </LI>
+                        <LI>
+                            Added accessors for message fragment collections used in parsing server messages for FTP/S.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.2<BR>(31 May, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added flag to Logger permitting thread names to be prepended to Logger name.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed "The host signature is invalid" error that can occur for some SFTP servers.</FONT>
+                        </LI>
+                        <LI>
+                            Improved connected() method for JRE 1.4+.</FONT>
+                        </LI>
+                        <LI>
+                            Change dirDetails() to cope with SYST unsupported.</FONT>
+                        </LI>
+                        <LI>
+                            Added ability to provide multiple alternative host-names to check a server 
+                            certificate's Common Name (CN) field against.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.1<BR>(1 May, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Minor bug fixes to scripting engine.</FONT>
+                        </LI>
+                        <LI>
+                            ASCII mode can now read Unix or Windows text files on any platform.</FONT>
+                        </LI>
+                        <LI>
+                            SSH fix to cope with non-standard server public keys being sent. Additional logging.</FONT>
+                        </LI>
+                        <LI>
+                            SSH fix to ignore failed chmod after upload (instead a warning is logged).</FONT>
+                        </LI>
+                        <LI>
+                            SSH fix where Unix paths on Windows meant the current dir was prepended to the Unix path.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.5.0<BR>(4 April, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added powerful scripting language so that FTP scripts can 
+                            be written for FTP,FTPS and SFTP. Can be run from a file or programmatically.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSL session resumption.</FONT>
+                        </LI>
+                        <LI>
+                            Fix to SSHFTPClient quit() method whereby a disconnect was being sent 
+                            before acknowledge of channel closure was received from the server. This caused one particular server
+                            to leave processes running indefinitely (and build up).</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.4.0<BR>(23 March, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Introduced FTPInputStream and FTPOutputStream for use with FTPClient, ProFTPClient and SSLFTPClient.</FONT>
+                        </LI>
+                        <LI>
+                            Fix ASCII mode bugs whereby some line terminators are incorrectly handled (FTP/S and SFTP).</FONT>
+                        </LI>
+                        <LI>
+                            Allow the SFTP subsystem path to be set.</FONT>
+                        </LI>
+                        <LI>
+                            Download operations append the remote filename to the local path if the local path is a directory.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed autodetect transfer mode bug where actual mode was not being changed on the FTP server.</FONT>
+                        </LI>
+                        <LI>
+                            FTPTransferCancelledException now thrown for FTP/S transfers if the transfer is cancelled.</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient.dirDetails() now can cope with single filenames and filename wildcards.</FONT>
+                        </LI>
+                        <LI>
+                            Added getVMSParser() to FTPFileFactory, permitting the VMSParser to be directly
+                            configured (and added is/setVersionInName() and get/setBlockSize() to VMSFileParser). Directory
+                            names returned now have ".DIR" trimmed off them. </FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.3.3<BR>(5 February, 2007)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added support for STOU, i.e. all put() methods now permit a null parameter for the remote filename - 
+                            the FTP server generates a unique name that is returned. </FONT>
+                        </LI>
+                        <LI>
+                            Improved exists() method for FTP and FTPS.</FONT>
+                        </LI>
+                        <LI>
+                            Improved error handling of connection establishment to misbehaving SSH servers.</FONT>
+                        </LI>
+                        <LI>
+                            Added support for AES ciphers in FTPS.</FONT>
+                        </LI>
+                        <LI>
+                            Permit 235 return code for PBSZ command (FTPS).</FONT>
+                        </LI>
+                        <LI>
+                            Now supports truncated SSH_FXP_STATUS messages.</FONT>
+                        </LI>
+                        <LI>
+                            Directory listings can be cancelled via cancelTransfer() if they are large and too slow.</FONT>
+                        </LI>
+                        <LI>
+                            Turn off strict reply code checking for FTP/S by default.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.3.2<BR>(14 November, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed bug in SSH progress monitoring.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed ArrayIndexOutOfBoundsException when using log4j integration.</FONT>
+                        </LI>
+                        <LI>
+                            Added setRemoteEOL() to SSHFTPClient.</FONT>
+                        </LI>
+                        <LI>
+                            Added zlib compression to SSHFTPClient.</FONT>
+                        </LI>
+                        <LI>
+                            Reordered SSH messages used in dirDetails() so it 
+                            works correctly with Axway File Broker (XFB).</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.3.1<BR>(3 November, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Jar file is now signed by a certificate from the JCE Code Signing Certification Authority.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in FTPS active mode that didn't close client's listening socket.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSHFTPValidator where calling addKnownHost() resulted
+                            in an error "Host file is not writeable".</FONT>
+                        </LI>
+                        <LI>
+                            Timeout value now applies during initial connection to a remote host,
+                            so connection attempts won't hang if a timeout is set. Only works for JRE 1.4+.</FONT>
+                        </LI>
+                        <LI>
+                            Improved readability of logging.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.3.0<BR>(13 October, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Complete rewrite of Developers' Guide in HTML format.</FONT>
+                        </LI>
+                        <LI>
+                            Complete rewrite and expansion of examples.</FONT>
+                        </LI>
+                        <LI>
+                            Updated and expanded message digest algorithms.</FONT>
+                        </LI>
+                        <LI>
+                            Control character encoding now used when reading directory listings.</FONT>
+                        </LI>
+                        <LI>
+                            Added exists() method to FTPClientInterface (and all clients).</FONT>
+                        </LI>
+                        <LI>
+                            Added FTPClientFactory, which creates FTP clients based on the supplied protocol.</FONT>
+                        </LI>
+                        <LI>
+                            Support for SOCKS 4 & 5 and HTTP proxies for SSHFTPClient.</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SSHFTPClient bug introduced in 1.2.8 that manifests as "bad client public DH value".</FONT>
+                        </LI>
+                        <LI>
+                            DISABLE_SSL_CLOSURE flag now applies to the ccc() command, so that
+                            servers that simply stop encrypting the data immediately upon receiving CCC (e.g. Globalscape) are
+                            supported.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.9<BR>(23 August, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            ProFTPClient now supports IPV6 extensions to FTP</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient now supports ssh.com private keys</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in handling FTP error messages when data connection has been terminated</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSHFTPClient where a get() leaves a new local file if an exception occurs.</FONT>
+                        </LI>
+                        <LI>
+                            Don't null out FileFactory when quit() is called.</FONT>
+                        </LI>
+                        <LI>
+                            Unit tests no longer in jar file to reduce its size.</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.8<BR>(24 May, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added AES cipher to SSH/SFTP</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SSH bug that prevented connection to Titan SFTP server</FONT>
+                        </LI>
+                        <LI>
+                            Fixed ArrayIndexOutOfBoundsException occurring in DynamicBuffer</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug where unnecessary channel was being opened and affecting PSFTPd SFTP server</FONT>
+                        </LI>
+                        <LI>
+                            Trial no longer has 10K transfer size limitation - now unlimited</FONT>
+                        </LI>
+                        <LI>
+                            mput() methods now do not attempt to create remote directories if they exist</FONT>
+                        </LI>
+                        <LI>
+                            Fixed timeout so it propagates correctly to active data sockets</FONT>
+                        </LI>
+                        <LI>
+                            Fixed VMS directory parsing bug</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.7<BR>(20 March, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Support for Java keystores</FONT>
+                        </LI>
+                        <LI>
+                            Introduced SSLFTPCertificateStore for managing root certificates</FONT>
+                        </LI>
+                        <LI>
+                            More flexible server validation functionality useful for interactive server validation</FONT>
+                        </LI>
+                        <LI>
+                            Real-time server certificate download</FONT>
+                        </LI>
+                        <LI>
+                            More flexibility in interpreting PASV response string</FONT>
+                        </LI>
+                        <LI>
+                            Tidied up SSH exception handling for better reporting</FONT>
+                        </LI>
+                        <LI>
+                            Fixed 3DES-CBC</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.6<BR>(21 February, 2006)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added getHostPublicKey() methods</FONT>
+                        </LI>
+                        <LI>
+                            Fix SSH server rekeying (which prevented transfers > 1 GB)</FONT>
+                        </LI>
+                        <LI>
+                            Fix for servers that miss out closing bracket in PASV response string</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SSHFTPClient.dirDetails() so that UID & GID are set for user and group</FONT>
+                        </LI>
+                        <LI>
+                            Added SSHFTPClient.setControlEncoding() so that non-ASCII filenames can be used in SFTP</FONT>
+                        </LI>
+                        <LI>
+                            Added SSHFTPClient.setServerResponseTimeout() for SFTP</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.5<BR>(18 November, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed thread bug in licensing module</FONT>
+                        </LI>
+                        <LI>
+                            Autodetection of ASCII/binary added as an option</FONT>
+                        </LI>
+                        <LI>
+                            Now accepts 230 reply for initial connection (returned by some proxy servers)</FONT>
+                        </LI>
+                        <LI>
+                            Added support for UTF ASN.1 string type in SSL certificates (solves "Not a PrintableString or IA5String" error)</FONT>
+                        </LI>
+                        <LI>
+                            Added changeGroup, changeOwner, changeMode, get/setUmask to SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            Added Keyboard-interactive (KBI) authentication to SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            Added ability to resume binary transfers in SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            Writes more detailed versioning info to debug</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSHFTPClient whereby a ConcurrentModificationException was thrown</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in SSHFTPProgressMonitor</FONT>
+                        </LI>
+                        <LI>
+                            Fixed permissioning problem in SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            More SFTP examples</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.4<BR>(17 October, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added SSLFTPCertificate.writePEM() for easier dumping of certificates</FONT>
+                        </LI>
+                        <LI>
+                            Added SSLFTPCertificateException with ability to print out the certificate</FONT>
+                        </LI>
+                        <LI>
+                            Amended Developer Guide and Javadoc to clarify the SSH key formats that are supported</FONT>
+                        </LI>
+                        <LI>
+                            Added SFTP setAuthentication() method permitting key to be supplied as an InputStream</FONT>
+                        </LI>
+                        <LI>
+                            Added append as an option to SFTP put() methods</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP bug that required the known hosts file to be set via loadKnownHosts() if addKnownHost() is called</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP bug whereby DSA private keys were failing to load</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.3<BR>(30 September, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed bug where SSHFTPClient could hang if connection broken or server error</FONT>
+                        </LI>
+                        <LI>
+                            Added loadClientKeyFile & loadRootCertificates variations that use an InputStream to load</FONT>
+                        </LI>
+                        <LI>
+                            Added setMaxPacketSize() to SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            Now accepts 230 reply for initial connection (returned by some proxy servers)</FONT>
+                        </LI>
+                        <LI>
+                            Fixed flush bug in StandardOutputAppender</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.2<BR>(21 September, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Permit 226 Transfer complete reply from empty dir listing</FONT>
+                        </LI>
+                        <LI>
+                            Now accepts 230 reply for initial connection (returned by some proxy servers)</FONT>
+                        </LI>
+                        <LI>
+                            Fixed bug in mget/mput</FONT>
+                        </LI>
+                        <LI>
+                            Now accepts 213 reply for SYST</FONT>
+                        </LI>
+                        <LI>
+                            Added extra test for no files found string comparisions for OS/390</FONT>
+                        </LI>
+                        <LI>
+                            Changed cancel processing to not use abort()</FONT>
+                        </LI>
+                        <LI>
+                            Increased max fields in parsing</FONT>
+                        </LI>
+                        <LI>
+                            Tweaked reply processing to remove possibility of NullPointerException</FONT>
+                        </LI>
+                        <LI>
+                            Make restart() public</FONT>
+                        </LI>
+                    </UL>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.1<BR>(28 August, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Speed up ASCII transfers in FTPS</FONT>
+                        </LI>
+                        <LI>
+                            Add setAutoPassiveIPSubstitution() for servers that return internal IP address</FONT>
+                        </LI>
+                        <LI>
+                            Repackaged SSH classes so no clashes exist with SSHTools</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.2.0<BR>(22 July, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            ProFTPClient now production</FONT>
+                        </LI>
+                        <LI>
+                            mput/mget/mdelete now in SSLFTPClient,SSHFTPClient</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient now supports ASCII/Binary modes rather than just binary</FONT>
+                        </LI>
+                        <LI>
+                            Fixed SFTP/SSHFTPClient bug that resulted in overflow of channel data window</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient get() methods no longer leave a zero sized file if the remote file does not exist</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient has more consistent exception throwing</FONT>
+                        </LI>
+                        <LI>
+                            SSHFTPClient now implements ProFTPClientInterface</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.9<BR>(17 June, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            SFTP out of beta and now production</FONT>
+                        </LI>
+                        <LI>
+                            Introduced beta of ProFTPClient that supports various mput/mget/mdelete methods.</FONT>
+                        </LI>
+                        <LI>
+                            Developers Guide updated wrt SFTP</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.8<BR>(24 May, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Improved FTPS performance by reducing handshaking load.</FONT>
+                        </LI>
+                        <LI>
+                            Added ability to enable/disable SSH algorithms.</FONT>
+                        </LI>
+                        <LI>
+                            Added auto-detection of key-types from known_hosts file.</FONT>
+                        </LI>
+                        <LI>
+                            Allow 350 response to STOR if strict checking is off</FONT>
+                        </LI>
+                        <LI>
+                            Added setActivePortRange to specify port numbers used in active transfers</FONT>
+                        </LI>
+                        <LI>
+                            Deprecated setPORTIP, renaming it to setActiveIPAddress</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.7<BR>(23 April, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Renamed to edtFTPj/PRO</FONT>
+                        </LI>
+                        <LI>
+                            Beta support for SFTP (SSH file transfers)</FONT>
+                        </LI>
+                        <LI>
+                            Deprecated all constructors other than default, and added getters/setters</FONT>
+                        </LI>
+                        <LI>
+                            Wildcards added to recursive operations</FONT>
+                        </LI>
+                        <LI>
+                            Allow validation to be switched off in quote()</FONT>
+                        </LI>
+                        <LI>
+                            Fixed problem where "Unexpected null reply received"</FONT>
+                        </LI>
+                        <LI>
+                            Fixed minor bug in UnixFileParser re symlinks</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.6<BR>(11 February, 2005)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Recursive get(), put() and delete() operations on directories supported</FONT>
+                        </LI>
+                        <LI>
+                            Writable check before download - if not writable, exception thrown</FONT>
+                        </LI>
+                        <LI>
+                            Some minor exception restructuring</FONT>
+                        </LI>
+                        <LI>
+                            ACCT and ABOR command support</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.5<BR>(19 November, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Added setPORTIP() so that an IP address can be forced to be used in active mode</FONT>
+                        </LI>
+                        <LI>
+                            Now supports Java 1.5.0</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.4<BR>(21 September, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Minor directory listing parsing bug fixes</FONT>
+                        </LI>
+                        <LI>
+                            Fix classloading problems when library redeployed in a J2EE container</FONT>
+                        </LI>
+                        <LI>
+                            Added resume capabilities for upload/download of binary files</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.3<BR>(28 July, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Wider compatibility with non-standard servers</FONT>
+                        </LI>
+                        <LI>
+                            Can set your own directory parser</FONT>
+                        </LI>
+                        <LI>
+                            Minor bug fixes re directory parsing</FONT>
+                        </LI>
+                        <LI>
+                            Allow non-strict server return code checking</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.2<BR>(28 June, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixed logging bug re control of logging levels</FONT>
+                        </LI>
+                        <LI>
+                            Minor bug fix for directory parsing of files with many spaces in them</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.1<BR>(24 May, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Server validation improved</FONT>
+                        </LI>
+                        <LI>
+                            FTPMessageListener added</FONT>
+                        </LI>
+                        <LI>
+                            Significant enhancements made to Developer's Guide</FONT>
+                        </LI>
+                        <LI>
+                            Examples have been enhanced</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.1.0<BR>(10 May, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Implicit mode FTPS is now supported in addition to explicit mode.</FONT>
+                        </LI>
+                        <LI>
+                            Logging API added, and log4j integration is now supported</FONT>
+                        </LI>
+                        <LI>
+                            dirDetails() method added for parsing directory listings</FONT>
+                        </LI>
+                        <LI>
+                            Detailed examples were added to the distribution, and documentation improved</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.0.3<BR>(5 April, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Fixes to permit the use of IBM JDK</FONT>
+                        </LI>
+                        <LI>
+                            Minor changes to security classes to prevent clashes with older Netscape security classes</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.0.2<BR>(17 March, 2004)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Minor bugfixes</FONT>
+                        </LI>
+                        <LI>
+                            Tweaks for some FTPS servers re the AUTH command</FONT>
+                        </LI>
+                        <LI>
+                            More configuration flags</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+            <TR>
+                <TD align="center">
+                    Version 1.0<BR>(17 November, 2003)
+                </TD>
+                <TD width="70%">
+                    <UL>
+                        <LI>
+                            Initial release</FONT>
+                        </LI>
+                    </UL>
+                </TD>
+            </TR>
+        </TABLE>
+    </BODY>
+</HTML>
+

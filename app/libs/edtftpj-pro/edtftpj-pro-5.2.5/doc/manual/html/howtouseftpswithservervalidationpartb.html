@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (with server validation - part B)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (with server validation - part B)</h1>
+        <p>This topic continues from <a href="howtouseftpswithservervalidationparta.html">How to use FTPS (with server validation - part A)</a>.</p>
+        <p>Every certificate has a CommonName (CN) attribute.  It is common for this attribute to be set to the host-name of the server.  If, for example, the name of the server is <i>ftp.mycompany.com</i> the CN 
+            would be <i>ftp.mycompany.com</i> also. When the CN is not the same as the host-name then the <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPStandardValidator.html">SSLFTPStandardValidator</a> 
+            will not successfully validate the server certificate, and the connection attempt will fail. 
+        </p>
+        <p>As it is not uncommon for the hostname to differ from the CN, the name to match to the CN can be explicitly supplied to the validator. A new instance must be created, as shown below: </p>
+        <pre><code class="language-java">ftp.setCustomValidator(new <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPStandardValidator.html#SSLFTPStandardValidator%28java.lang.String%29">SSLFTPStandardValidator</a>(commonName));</code></pre>
+        <p>Here, a <i>commonName</i> variable holds the string to be matched to the CN of the server certificate. </p>
+        <p>See <a href="howtouseftpswithservervalidationpartc.html">How to use FTPS (with server validation - part C)</a> for details on how to ignore the CN completely.</p>
+        <p>Apart from this, configuration of the <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a> is the same as in <a href="howtouseftpswithservervalidationparta.html">Part A</a>.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

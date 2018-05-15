@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>How to run the examples</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to run the examples</h1>
+        <p>edtFTPj/PRO has a wide range of examples available in the <i>howto</i> directory of the distribution.</p>
+        <p>There is one example per subdirectory. Each subdirectory is clearly labelled after its <i>how to</i> example, and contains at the minimum a Java file and <i>run.bat</i>. The <i>run.bat</i>
+            file is used to compile and run the example Java class on Windows platforms. It can be easily converted to a shell script on Unix.
+        </p>
+        <p>A trial license, <i>license.jar</i>, is provided via a download link after registering for the trial, and is also emailed to the registered email address. It should be
+            placed in the <i>lib</i> directory for the examples to run. This also applies to the production <i>license.jar</i> that is emailed to purchasers.
+        </p>
+        <p>To run the examples, your environment must be set up. In the <i>howto</i> directory, there is an <i>env.bat</i> file that is called by all <i>run.bat</i> files
+            to set up their environment. This file checks that JAVA_HOME is set correctly, and sets the CP variable for these examples (which is used to set the CLASSPATH). The CP variable is set as below:
+        </p>
+        <pre><code class="language-java">set CP=.;..\..\..\..\lib\edtftpj-pro.jar;..\..\..\..\lib\license.jar</code></pre>
+        <p>Normally, <i>env.bat</i> should not need to be modified. If the CP variable is changed, ensure that "." is left in so that the compiled class file can be found. The path of <i>edtftpj-pro.jar</i>
+            and <i>license.jar</i> files must be set in CP as shown.
+        </p>
+        <p>To actually run an example after <i>env.bat</i> has been set up correctly, open a DOS window and cd into the subdirectory of the example you wish to run. Then simply type "run", and the Java file will
+            be compiled and a usage message displayed:
+        </p>
+        <pre><code class="language-java">Usage: ConnectToServer remote-host username password</code></pre>
+        <p>In the example above, the message is saying that the remote hostname, username and password need to be supplied as arguments to run.bat. So to run the example, you would use:</p>
+        <pre><code class="language-java">run myhost myuser mypassword</code></pre>
+        <p>The result (if successful) should be a few lines of debug, something like that shown below:</p>
+        <pre><code class="language-java">INFO [ConnectToServer] 3 Oct 2006 17:05:49.139 : Creating FTP client
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.219 : Setting remote host
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.239 : Connecting to server edtmobile
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.259 : Connected to server edtmobile
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.259 : Logging in with username=javaftp and password=javaftp
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.259 : Logged in
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.269 : Quitting client
+INFO [ConnectToServer] 3 Oct 2006 17:05:49.279 : Example complete</code></pre>
+        <p>Other examples may require additional arguments, such as the server's certificate or other authentication details. These should always be clearly shown in the usage message displayed when <span style="font-style: italic;">run.bat</span> is called
+            with no arguments. Also, for each example, consult the corresponding <a href="howto.html">How to</a> documentation in this guide for detailed explanation of the concept.
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

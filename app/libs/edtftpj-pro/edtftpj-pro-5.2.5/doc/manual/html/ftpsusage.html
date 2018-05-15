@@ -1,0 +1,88 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>FTPS Usage</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>FTPS Usage</h1>
+    <p>A typical explicit FTPS session might consist of the following sequence of commands:</p>
+    <table border="0" width="567"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+        <tr>
+            <td><tt>> USER (user-name)</tt></td>
+            <td><i>Log in</td>
+        </tr>
+        <tr>
+            <td><tt>> PASS (password)</tt></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><tt>> LIST</tt></td>
+            <td><i>Get a directory listing</i></td>
+        </tr>
+        <tr>
+            <td><tt>> AUTH TLS</tt></td>
+            <td><i>Switch to TLS on control-channel</i></td>
+        </tr>
+        <tr>
+            <td><tt>> RETR (file-name)</tt></td>
+            <td><i>Download a file (without security)</i></td>
+        </tr>
+        <tr>
+            <td><tt>> PBSZ 0</tt></td>
+            <td><i>Switch to TLS on the data-channel </i></td>
+        </tr>
+        <tr>
+            <td><tt>> PROT P</tt></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><tt>> STOR (file-name)</tt></td>
+            <td><i>Upload a file (with security)</i></td>
+        </tr>
+        <tr>
+            <td><tt>> QUIT</tt></td>
+            <td><i>End session</i></td>
+        </tr>
+    </table>
+    <p>In this example, the first three commands (USER, PASS, and LIST) are standard FTP and therefore insecure.  The AUTH command causes the rest of the commands to be sent to the server securely, 
+        in other words, an attacker cannot see which commands are issued.  The GET command, being after AUTH, is protected, but the actual file that is transferred is not protected since it precedes 
+        the PBSZ and PROT commands.   PBSZ and PROT tell the server to use TLS on all future data-channels, thus the file transferred in the PUT command is secure.
+    </p>
+    <h4>Rules</h4>
+    <p>There are two rules regarding the issuing of explicit FTPS commands that must be followed:</p>
+    <ol>
+        <li>AUTH must precede PBSZ</li>
+        <li>PBSZ must precede PROT</li>
+    </ol>
+    <p>Apart from these, a FTPS server has policies regarding access permissions to its resources. These policies will also determine the order in which commands must be issued.  
+        There are too many possible policies to list here, but a few examples of such policies are given below along with their consequences in terms of the issuing of commands.
+    </p>
+    <table border="1"  bordercolor="#999999"  width="650"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+        <tr>
+            <td><b>Policy</b></td>
+            <td><b>Consequences</b></td>
+        </tr>
+        <tr>
+            <td>No unprotected commands</td>
+            <td>AUTH must be issued before any other commands.</td>
+        </tr>
+        <tr>
+            <td>Certain users are not permitted to log in without security.</td>
+            <td>The USER command is rejected for particular users unless preceded by a successful AUTH command.</td>
+        </tr>
+        <tr>
+            <td>No unprotected data may be transferred</td>
+            <td>A 'PROT P' command (preceded by a PBSZ command) must be issued before any files are transferred.</td>
+        </tr>
+        <tr>
+            <td>Allow TLS authentication instead of USER/PASS authentication</td>
+            <td>A client certificate must be supplied and USER/PASS commands are not required.</td>
+        </tr>
+    </table>
+    <p>Next: <a href="theessentialsofftpsecurity.html">The Essentials of FTP Security</a></p>
+</body>
+</html>
+

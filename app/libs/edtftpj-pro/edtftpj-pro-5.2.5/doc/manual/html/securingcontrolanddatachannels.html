@@ -1,0 +1,23 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Securing Control and Data Channels</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Securing Control and Data Channels</h1>
+    <p>The reader may be aware that FTP operates with two types of channels: <i>control</i> and <i>data</i>. Only one control-channel is used in each session, but several data-channels may be used - one for each data transfer.  
+        The AUTH command only secures the control-channel.  Data- channels are not secured until PBSZ and PROT commands are issued.  These commands tell the server whether or not subsequent data-channels should 
+        be secure.
+    </p>
+    <p>A basic assumption of RFC2228 is that a client should be allowed to connect to a server in normal plain text mode and then be able to switch to a secure protocol upon request.  
+        This switch is done when the client issues an AUTH command at which time the client and the server negotiate a secure connection.  After the switch, all FTP commands are encrypted, but importantly, 
+        data is not encrypted unless further commands are provided.
+    </p>
+    <p>Ford-Hutchinson takes a major departure from the RFC when securing the data-channel, but that is largely beyond the scope of this document.</p>
+    <p>Next: <a href="ftpscommands.html">FTPS Commands</a></p>
+</body>
+</html>
+

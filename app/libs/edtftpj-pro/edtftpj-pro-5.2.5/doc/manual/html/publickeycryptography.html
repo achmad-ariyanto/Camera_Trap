@@ -1,0 +1,42 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Public Key Cryptography</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 3," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Public Key Cryptography</h1>
+    <p>Public Key Cryptography (PKC) is a paradigm which uses a pair of keys in a given communication; one key is used for encrypting the message and the other key is used for decrypting it. 
+        Each key may serve either purpose, but a message encrypted using one key may ONLY be decrypted by the other key.
+    </p>
+    <p>The following illustration demonstrates how such a pair of keys may be employed for secure communication: </p>
+    <div style="padding-left: 50px; font-style: italic ">
+        <p>Party A has generated a key-pair.  They retain one key, the private key, and distribute they other key, the public key, to Party B in a trustworthy way (see Section 4.1.2).</p>
+        <p>1. A encrypts a message using the private key and sends it to B.  If B is able to decrypt the message using the public key, then B may be confident that the message did in fact originate from A, 
+            since only A has the private key.
+        </p>
+        <p>2. B encrypts a message using the public key and sends it to A.  Since the message may only be decrypted using the private key, and only A has this key, B may be confident that only A will be 
+            able to read the message.
+        </p>
+    </div>
+    <p>Thus, using <i>A</i>'s private/public pair of keys, <i>B</i> can ensure that (1) <i>A</i> is who they purport to be, and (2) Any messages that are sent to <i>A</i> can be read by that party only.  
+        However, the following weakness remain: (1) <i>A</i> cannot be confident that <i>B</i> is who <i>B</i> purports to be, and (2) Communications from <i>A</i> to <i>B</i> may be read by anyone who has the public key.
+    </p>
+    <p>While both of these weaknesses may easily be overcome if <i>B</i> has their own key-pair and has provided the public key to <i>A</i>, this is often not practical due to the amount of effort involved. However, the latter shortcoming may easily be overcome in the following way: </p>
+    <div style="padding-left: 50px; font-style: italic ">
+        <p>3. B automatically generates a temporary key-pair.  Since B may be confident that its messages to A are only read by A, B can securely provide one of the keys to A. Once A has received this key, 
+            they may use it to encrypt any messages sent to B. They may therefore be confident that only B can read any subsequent messages.
+        </p>
+    </div>
+    <p>Thus, a single private-public key-pair has the potential to offer the following security:</p>
+    <p>I.Parties receiving messages from the owner of the key-pair can verify that encoded messages originated from the owner.</p>
+    <p>II.Secure messages may be sent between the owner and other parties.</p>
+    <p>As mentioned, this presumes that the owner of the key-pair is able to distribute their public keys in a trustworthy manner.  In practice, this is achieved by means of public key certificates and 
+        Certificate Authorities.
+    </p>
+    <p>Next: <a href="certificatesandcertificateauthoritiescas.html">Certificates and Certificate Authorities (CAs)</a></p>
+</body>
+</html>
+

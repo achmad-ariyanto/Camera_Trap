@@ -1,0 +1,30 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Session Commands</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Topic 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>Session commands</h1>
+    <p>To begin an FTP session, the USER command is sent to the server:</p>
+    <pre><code class="language-java">> USER ftpuser</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">331 Password required for ftpuser.</code></pre>
+    <p>The client must respond with the password:</p>
+    <pre><code class="language-java">> PASS mypassword</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">230 User ftpuser logged in.</code></pre>
+    <p>The session is now established, and the user can begin issuing various file and directory- related commands.</p>
+    <p>To end the session, the client sends:</p>
+    <pre><code class="language-java">> QUIT</code></pre>
+    <p>The server responds with:</p>
+    <pre><code class="language-java">221</code></pre>
+    <p>The session is now closed, and any further attempt to send commands to the server will fail.</p>
+    <p>Next: <a href="filecommands.html">File Commands</a></p>
+    <script src="../js/prism.js"></script>  
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use different character encodings</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use different character encodings</h1>
+        <p>Officially the FTP protocol (RFC959) only supports 7-bit ASCII characters. This means that file and directory names transferred across the control channel can only be ASCII.</p>
+        <p>However, most FTP servers do support extended (i.e. 8-bit) ASCII. Unfortunately there are many types of extended ASCII and there is no standard for what extended ASCII encoding is to be used. 
+            As a result, the meaning of characters 0 to 127 is well-defined, but the meaning of characters 128 to 255 varies from one server to the other. For example, one server might interpret character 193 as 
+            an accented A, whereas another might interpret it as an accented E. 
+        </p>
+        <p>By default, <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a>, 
+            <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, and 
+            <a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html">ProFTPClient</a> support 7-bit ASCII. If a character is encountered whose code is 128 to 255 it will be represented as a question mark. 
+            The <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setControlEncoding%28java.lang.String%29">setControlEncoding</a> method allows the developer to select an 8-bit character encoding that
+            matches that of the server. Unfortunately many servers do not state what 8-bit ASCII character set they are using, so it is often necessary to use trial and error to find out. 
+            Some common character encodings to try for western European languages are <i>windows-1252</i> and <i>ISO-8859-1</i>.
+        </p>
+        <p>For example, to set the command encoding to <i>windows-1252</i>:</p>
+        <pre><code class="language-java">ftp.setControlEncoding("Windows-1252");</code></pre>
+        <p>For Chinese, try using an encoding such as <i>Big5</i>.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

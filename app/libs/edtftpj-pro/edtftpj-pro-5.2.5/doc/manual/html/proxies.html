@@ -1,0 +1,26 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>Proxies</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 3," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>Proxies</h1>
+    <p>A proxy server is a server that sits between clients and other servers to mediate requests. The client connects to the proxy, requesting a connection to (say) an FTP server. 
+        As long as the proxy server determines that the client is permitted to do so, the proxy server connects to the requested server on behalf of the client. The client's connection 
+        to the proxy server then acts as a connection to the requested server, and the client can then communicate with the server as though the proxy isn't there.
+    </p>
+    <p>There are numerous types of proxy servers available, but the primary ones used for FTP and related protocols are HTTP proxies and SOCKS proxies.</p>
+    <div align="center"><img src="../images/socks.gif" border="0"  alt="graphic" ></div>
+    <p>A proxy connection is made as follows:</p>
+    <ol>
+        <li>The client connects to the proxy server.</li>
+        <li>The client requests that the proxy server should form a connection to the remote server.</li>
+        <li>The proxy server connects to the remote server.</li>
+    </ol>
+    <p>Once the connection has been established communications proceed as though the client were connected directly to the server; the proxy simply relays every byte of information sent to and from the server.</p>
+</body>
+</html>
+

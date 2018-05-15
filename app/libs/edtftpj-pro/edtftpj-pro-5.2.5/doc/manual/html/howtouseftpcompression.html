@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use data compression for FTP/FTPS</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use data compression for FTP/FTPS</h1>
+        <p>Some FTP/FTPS servers support what is called MODE Z data compression to reduce the amount of data that is transmitted. Both the client and server compress data before sending and 
+            decompress data when it is received.
+        </p>
+        <p>Compression and decompression both use CPU time, but if transmission speeds are slow, transfers can be sped up significantly, particularly if text files are being transferred. 
+            A compression factor of 10x is not unusual for text files.  Media files are usually compressed already (e.g. JPEG and MPEG) and there will be little or no benefit in using compression. 
+            In fact with the added CPU time it may even be detrimental.
+        </p>
+        <p>An example of how to enable MODE Z compression is shown below. An FTPException will be thrown if MODE Z is not supported.</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html#enableModeZCompression()">enableModeZCompression()</a>;</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

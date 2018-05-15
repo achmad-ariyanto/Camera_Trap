@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (implicit)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (implicit)</h1>
+        <p>The topic <a href="howtouseftpsintroduction.html">How to use FTPS (introduction)</a> describes the FTPS features of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>. 
+            This topic demonstrates the use of implicit FTPS.
+        </p>
+        <P>Implicit FTPS is very similar to explicit FTPS (which is the default). Implicit FTPS is an older (and obsolete) form of FTPS which connects on a different port (usually 990) from standard FTP (which is 21). It is not recommended for deployment in new systems and is included in this library mainly for compatibility with legacy systems.</P>
+        <p>To use implicit FTPS, the setImplicitFTPS method should be used before connecting. </p>
+        <p>A different auth method is used after connect, which takes a char parameter indicating whether data channels are encrypted or not. PROT_PRIVATE indicates that data channels are encrypted, 
+            while PROT_CLEAR indicates that clear data channels are required. This is the same parameter supplied to the prot method in explicit FTPS, and it has the same meaning.
+        </p>
+        <p>Some servers may not require the auth method to be called at all.</p>
+        <p>An example is shown below:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#setImplicitFTPS%28boolean%29">setImplicitFTPS(true)</a>;
+ftp.connect();
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#auth%28char%29">auth</a>(SSLFTPClient.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#PROT_PRIVATE">PROT_PRIVATE</a>);</code></pre>
+        <p>Apart from the changes in the example above,  everything else is the same as with explicit FTPS.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

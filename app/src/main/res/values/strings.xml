@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Camera_Trap</string>
+    <string name="user">user</string>
+    <string name="pwd">pwd</string>
+
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="Login">Log In</string>
+
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="date">Date</string>
+
+    <string name="sel_date">Selected Date</string>
+
+    <string-array name="mon">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string name="FTP_User">ftptugasakhir.pptik.id|ftptugasakhiruser</string>
+    <string name="FTP_Pwd">ZxCzXc123!</string>
+    <string name="FTP_Host">ftptugasakhir.pptik.id</string>
+
+    <string name="SFTP_User">sftpimageproc|imageproc</string>
+    <string name="SFTP_Pwd">Img0305@</string>
+    <string name="SFTP_Host">sftp.lskk.ee.itb.ac.id</string>
+
+</resources>

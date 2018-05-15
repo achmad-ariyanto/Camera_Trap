@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use connection pooling</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use connection pooling</h1>
+        <p><a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html">SecureFileTransferClient</a> uses an FTP connection pool internally, rather than a single connection to the FTP server. 
+            This can increase robustness of applications, as the pool provides automatic reconnection of failed connections. It also means that multiple simultaneous transfers can be performed from different threads, 
+            and new connections can be created dynamically when required. 
+        </p>
+        <p>By default, one connection is created when connecting to the server, and a maximum of three connections are supported. This means that if one thread is performing a transfer on an instance of 
+            SecureFileTransferClient, another thread can perform a different transfer simultaneously using the same instance, as it will be allocated a different connection (which will be created if required). 
+        </p>
+        <p>Occasionally it may be necessary to change the defaults. For example, it may be known that more than three transfers may be performed simultaneously, or perhaps all connections should be established 
+            from the start. The example below shows a client that has four connections initially, and has a maximum of 10 connections. 
+        </p>
+        <pre><code class="language-java">SecureFileTransferClient client = new SecureFileTransferClient(4, 10);</code></pre>
+        <p>If a connection is not available when a method such as <i>uploadFile()</i> is called, the method will block until a connection is freed from another operation, and then proceed.</p>
+        <p>User should be careful not to allocate too many connections. Having many connections simultaneously transferring data may slow down each individual transfer - there may be a bottleneck on either the client 
+            or server side and simply adding connections beyond a certain point may not make much difference. The defaults should be used unless there is a definite need for more connections. 
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to diagnose problems</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>How to diagnose problems</h1>
+        <p>edtFTPj/PRO has a rich API and provides complex capabilities. There are a wide
+            variety of FTP, FTPS and SFTP servers in existence, which may or may not implement
+            the relevant standards. 
+        </p>
+        <p>If difficulties are experienced in connecting to a server or performing
+            operations, a number of steps can be taken to try to resolve the problem:
+        </p>
+        <h4>Diagnostic steps</h4>
+        <ol>
+            <li>Ensure that you can connect using a standalone FTP application such as <a href="https://filezilla-project.org/download.php" target="_blank"><u>FileZilla</u></a>. If you cannot
+                connect with FileZilla, it is likely that other clients (such as this
+                one) will also experience difficulties connecting. Make sure you select the correct protocol.
+            </li>
+            <li>For SFTP, alternatively (or also) use a command-line ssh client to connect
+                to the server using the authentication method of your choice, and ensure that this
+                works. <b>ssh -vvv </b>can be used to provide helpful debugging information.
+            </li>
+            <li>If you can connect using FileZilla, try using the appropriate How To
+                example (with suitable settings) provided with the distribution. 
+            </li>
+            <li>Generate a log file exhibiting the error with the level set to <i>ALL</i>.
+                This may provide you (and us) with a clue to the problem.
+            </li>
+            <li>If possible, obtain the server log file to see if it contains any clues to
+                the problem.
+            </li>
+            <li>Search 
+                the <a href="http://enterprisedt.com/questions/index.php/questions/products/java-ftp" target="_blank">question & answer board</a> 
+                to see if the issue has been reported and a resolution posted.
+                The board is searchable and contains advice and answers many common questions that developers have faced when using this library.
+            </li>
+            <li>Consult the product's <a href="http://enterprisedt.com/products/edtftpjssl/doc/manual/html/history.html" target="_blank">latest revision
+                history</a> to see if your problem has been resolved in a later version of the software. If your support agreement is current,
+                download the latest version. 
+            </li>
+        </ol>
+        <p>
+            If you are unable to resolve the problem and you have a current support
+            agreement, you may need to <a href="support.html">contact support</a>.
+        </p>
+    </body>
+</html>
+

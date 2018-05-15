@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>Implicit FTPS and Explicit FTPS</title>
+        <meta name="keywords" content="Chapter 2,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>Implicit FTPS and Explicit FTPS</h1>
+        <p>Before the FTPS Internet Draft was published a somewhat abortive attempt at offering a secure version of FTP was made.  This is now referred to as <i>implicit FTPS</i>.  
+            It is a very simplistic technique which involves using standard secure TLS sockets in place of plain sockets at all points.  Since standard TLS sockets require an exchange 
+            of security data immediately upon connection, it is not possible to offer standard FTP and implicit FTPS on the same port.  For this reason another port needs to be opened – usually port 990.
+        </p>
+        <p>Implicit FTPS is in the process of being phased out in favour of FTPS as described in the Internet Draft.  This newer variant of FTPS is now referred to as explicit FTPS.  
+            It has some substantial advantages over implicit FTPS:
+        </p>
+        <ol>
+            <li>It is a standard extension of FTP and is therefore supported by most FTP servers.</li>
+            <li>It uses standard FTP ports meaning that there is no need to open addition ports in firewalls when upgrading from FTP to FTPS.</li>
+            <li>It is more flexible in that it allows security to be turned off and on in a single session.</li>
+            <li> It is compatible with the RFC2228 standard.</li>
+        </ol>
+        <p>Both implicit and explicit FTPS are supported by edtFTPj/PRO.  Most of the rest of this guide will apply to explicit FTPS as this is the protocol that is recommended for any but applications 
+            requiring compatibility with legacy applications, however a howto example of usage of implicit FTPS will be provided.
+        </p>
+        <p>Next: <a href="securingcontrolanddatachannels.html">Securing Control and Data Channels</a></p>
+    </body>
+</html>
+

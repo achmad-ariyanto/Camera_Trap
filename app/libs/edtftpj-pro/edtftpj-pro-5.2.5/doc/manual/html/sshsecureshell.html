@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns=
+"http://www.w3.org/1999/xhtml">
+<head>
+    <title>SSH - Secure Shell</title>
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org" />
+    <meta name="generator" content="HelpMaker.net" />
+    <meta name="keywords" content="Chapter 3," />
+</head>
+<body>
+    <h1>SSH - Secure Shell</h1>
+    <p>SSH is a standard designed to allow logging in and execution of commands on a remote computer in a manner similar to telnet, rlogin, and rsh.  Unlike these protocols, 
+        it does this through an encrypted network connection  thus offering a much higher level of security. 
+    </p>
+    <p>The first version of the standard, SSH-1, was designed in 1995 by Tatu Yl&ouml;nen.  The second version, SSH-2, is being standardized by the IETF SECSH working group.  
+        It offers a higher level of security than its predecessor.
+    </p>
+    <p>In order for a computer to be able to accept SSH connections, it must be running an SSH server, such as <i>sshd</i>, on a publicly accessible port (usually port 22). 
+        The client computer must have an SSH client, such <i>ssh</i>, and be known to the server.  A client is known to the server either by logging in as a known ssh user, 
+        or by the client's public key if it has been registered with the server.  This differs significantly from SSL which relies on certificates rather than private/public key-pairs.
+    </p>
+    <p>Private/public key-pairs in SSH typically use either the DSA or RSA asymmetric key algorithms. Most SSH servers support both.</p>
+    <p>SSH supports the use of data compression to reduce the amount of data that is transmitted. Both the client and server agree on a compression algorithm. 
+        They then compress data before sending and decompress data when it is received. Typically, the <a href="http://www.zlib.net" target="_blank">zlib</a> compression algorithm is used.
+    </p>
+    <p>Once an SSH session has been established the user may use the console commands that are native to the remote computer.</p>
+</body>
+</html>
+

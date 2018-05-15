@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>How to use the command shell</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use the command shell</h1>
+        <p>edtFTPj/PRO provides a powerful command shell that enables users to manually execute a series of <a href="scriptreference.html">FTP commands</a> in a similar way to Windows' <i>ftp.exe</i> client 
+            or <i>ftp</i> on Unix. The difference is that edtFTPj/PRO's command shell is cross-platform (it will run wherever Java can be installed) and supports both types of secure FTP: FTPS (FTP over SSL) 
+            and SFTP (FTP over SSH). 
+        </p>
+        <p>The command shell is started by running the <i>ftpshell.bat</i> (or <i>ftpshell</i> on Unix). No options need be supplied, although there are a variety of options that are described below:</p>
+        <pre><code class="language-java">ftpshell [user@]host[:port] [-c configfile] [-n] [-h] [-p password] [-o protocol] [-v]
+    
+-c configfile	configuration script to run before connecting. Any commands may be used, including open.
+-n 	do not connect to the server (default is to connect if credentials and host supplied)
+-h	display the help
+-p  password	set the user password
+-o  protocol	set the protocol: ftp|ftps|ftpsi|sftp
+    ftp - standard FTP (the default)
+    ftps - FTP over SSL (explicit)
+    ftpsi - FTP over SSL (implicit)
+    sftp - FTP over SSH
+-v	print version details</code></pre>
+        <p>If no options are supplied, the standard prompt appears and commands can be entered: </p>
+        <pre><code class="language-java">ftp> </code></pre>
+        <p>At this point, the shell is not connected as a host has not been specified. If instead the shell was started with: </p>
+        <pre><code class="language-java">ftpshell javaftp@edtlinux1:21 -p javaftp </code></pre>
+        <p>then as there is sufficient information (host, username, password) then a connection is opened to the specified host (called edtlinux1 in this instance) 
+            on port 21, and an attempt to establish a standard FTP session will be made. If connection and login is successful, the user will be informed of this. 
+        </p>
+        <p>If '-o ftps' was supplied in addition to the parameters above, a secure FTPS session would have been opened instead, provided that an FTPS server was 
+            available at the standard port for this host. In this case the command prompt would reflect that it is a secure session: 
+        </p>
+        <pre><code class="language-java">ftps> </code></pre>
+        <p>Once a connection has been established, the usual FTP commands (and many additional commands) can be executed as detailed in the <a href="scriptreference.html">command reference</a>. 
+            If insufficient details have been provided as command-line parameters to enable a connection and login to be made, the <i>open</i> command can be used to open a connection within the shell, e.g. 
+        </p>
+        <pre><code class="language-java">open edtlinux1 </code></pre>
+        <p>In this case the <i>set</i> commmand would need to have been used to set the username and password prior to calling <i>open</i>. </p>
+        <p>Once all the operations required have been completed, the connection can be closed by the <i>close, quit or bye commands</i>. The user will still be within the shell, 
+            and open command can be used to re-open a connection. The <i>set</i> command can be used to reset parameters so that a new host can be logged into, or the <i>close, quit or bye commands</i> 
+            can be used again to exit the shell session. 
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

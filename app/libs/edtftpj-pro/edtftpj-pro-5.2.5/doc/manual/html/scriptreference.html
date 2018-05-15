@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>Command Reference</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>Command Reference</h1>
+        <p>Scripting and shell commands are described in the table below. Abbreviations for commands are noted in the command description. </p>
+        <p>Where the command has optional arguments, they are shown in square brackets, e.g. <i>open [host[:port]]</i> means that for the open command, 
+            the host and port are optional parameters (but if the port is supplied, the host must be supplied).
+        </p>
+        <table border="1"  bordercolor="#999999"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+            <tbody>
+                <col width="200">
+                <col width="600">
+                <tr>
+                    <td><b>Command</b></td>
+                    <td><b>Description</b></td>
+                </tr>
+                <tr>
+                    <td><b>help</b> <i>[command]</i></td>
+                    <td>Prints out help for a specific command, or if no command is specified, a list of supported commands is provided.</td>
+                </tr>
+                <tr>
+                    <td><b>version</b></td>
+                    <td>Prints out version details.</br>
+                        Can use <i>ver</i> as an abbreviation. 
+                    </td>
+                </tr>
+                </tr>
+                <tr>
+                    <td><b>debug</b></td>
+                    <td>Switches debug on or off. If debug is already on, it is switched off (and vice versa). When debug is enabled, more information is displayed when commands are executed.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>set</b>
+                    </td>
+                    <td>
+                        Sets various parameters used during the session, many of which are optional. Syntax is <tt>set name=value</tt>.</br></br>
+                        Note that 'set' can be omitted, and thus <tt>protocol=ftp</tt> is a valid
+                        command. </br></br>
+                        Variables can be created this way. If an unknown variable is set using the 'set' command, then a variable of that name and value is created, e.g. <tt>myprotocol=ftp</tt> creates a
+                        variable called 'myprotocol' set to the string value 'ftp'. </br></br>
+                        The value of variables can be printed out using <i>echo</i>.</br></br>
+                        The value of all set variables can be printed out using set without any arguments.</br></br>
+                        The set command also supports a feature originally found on Unix systems called backquoting.
+                        This is where a variable is assigned the value of the output of a command, which must be surrounded by back quotes (the '`' symbol).</br></br>
+                        For example, to set the variable 'currendir' to the value of the current remote working directory, use <tt>set currentdir=`pwd`</tt>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set protocol</b></td>
+                    <td>
+                        </br>Set the protocol to be used. Note that the protocol cannot be changed while connected. Supported protocols are shown below:</br></br>
+                        <table border="1"  bordercolor="#999999"  width="567"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+                            <tbody>
+                                <tr>
+                                    <td><b>Protocol</td>
+                                    <td><b>Description</b></td>
+                                </tr>
+                                <tr>
+                                    <td>ftp</td>
+                                    <td>"Plain" FTP protocol</td>
+                                </tr>
+                                <tr>
+                                    <td>ftps</td>
+                                    <td>FTPS, i.e. FTP over SSL (explicit mode)</td>
+                                </tr>
+                                <tr>
+                                    <td>ftpse</td>
+                                    <td>FTPS, i.e. FTP over SSL (explicit mode)</td>
+                                </tr>
+                                <tr>
+                                    <td>ftpsi</td>
+                                    <td>FTPS, i.e. FTP over SSL (implicit mode).</td>
+                                </tr>
+                                <tr>
+                                    <td>sftp</td>
+                                    <td>SFTP, i.e. FTP over SSH</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </br>
+                        Note that server validation is not yet supported for any secure protocol, and the only form of client validation supported is username/password. Future versions will support client and server validation.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set connectmode</b></td>
+                    <td>Sets the connection mode for data transfers and listings. Not applicable for SFTP protocol. Possible values are <i>active</i> or <i>passive</i>., e.g. set connectmode=active.</td>
+                </tr>
+                <tr>
+                    <td><b>set remotehost</b></td>
+                    <td>Sets the remote host to be connected to, e.g. set remotehost=ftp.gnu.org</td>
+                </tr>
+                <tr>
+                    <td><b>set user</b></td>
+                    <td>Sets the username, e.g. set user=javaftp. This username is used for all supported protocols.</td>
+                </tr>
+                <tr>
+                    <td><b>set password</td>
+                    <td>Sets the user's password, e.g. set password=javaftp. This password is used for all supported protocols.</td>
+                </tr>
+                <tr>
+                    <td><b>set servercert</b></td>
+                    <td>Sets the path of the server certificate (or the server's CA root certificate) to use for server validation for FTPS. Currently supports PEM file format for certificates.
+                        Once set, server validation is automatically switched on.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set clientcert</b></td>
+                    <td>Sets the path of the client certificate to use for client validation for FTPS. Currently supports PEM file format for certificates. 
+                        Note that the password must also be set via <i>certpassword</i>.
+                        Once set, client validation is automatically switched on.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set certpassword</b></td>
+                    <td>Sets the password (or passphrase) of the client certificate used for client validation (FTPS).</td>
+                </tr>
+                <tr>
+                    <td><b>set serverpublickey</b></td>
+                    <td>
+                        Sets the path of the server's public key to use for server validation for SFTP. Supports OpenSSH and SECSH file formats.
+                        Once set, server validation is automatically switched on. More typically <i>set knownhosts</i> is used. </br></br>
+                        Can also use <i>serverkey</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set knownhosts</b></td>
+                    <td>Sets the path of the <i>known_hosts</i> file to use for server validation for SFTP. Once set, server validation is automatically switched on.</td>
+                </tr>
+                <tr>
+                    <td><b>set clientprivatekey</td>
+                    <td>Sets the path of the client private key file to be used for public key authentication in SFTP. Supports PuTTY, 
+                        OpenSSH and SSH.com private key formats. Note that the <i>clientprivatekeypass</i> must also be set.
+                        </br></br>
+                        Can also use <i>clientkey</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set clientprivatekeypass</b> </td>
+                    <td>Sets the passphrase of the client private key file to be used for public key authentication in SFTP.
+                        </br></br>
+                        Can also use <i>clientkeypass</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set timeout</b></td>
+                    <td>Optional. Sets the timeout in seconds for read or write operations (and for the initial connection attempt for
+                        JRE 1.4 and greater). The default is 0 (which is an infinite timeout). e.g. set timeout=10
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set port</b></td>
+                    <td>Optional.
+                        Defaults are determined by the protocol. Sets the port number to
+                        connect to, e.g. set port=21
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set dataports</b></td>
+                    <td> Optional. Only applicable for active mode. Sets the data port range
+                        that the client will listen on for listings and transfers. The low port number must be listed first, e.g. set dataports=10100-10140
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set loglevel</b></td>
+                    <td>Optional. Sets the logging level. 0 means no
+                        logging, while 5 is the maximum log level (the default). e.g. set
+                        loglevel=4
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set logfile</b></td>
+                    <td>Sets the name or full path of the logfile to direct logging to, e.g. set logfile=C:\temp\ftp.log </td>
+                </tr>
+                <tr>
+                    <td><b>set configflags</b></td>
+                    <td>
+                        Sets
+                        configuration flags, primarily for FTPS. The flags supported are listed below. The '|' symbol
+                        can be used to OR the flags together, e.g. 'set configflags = DISABLE_CONTROL_SSL_CLOSURE | ALLOW_BASIC_CONSTRAINTS_IN_NON_CA'</br></br>
+                        <table border="1"  bordercolor="#999999"  width="567"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+                            <tbody>
+                                <tr>
+                                    <td><b>Flag</b></td>
+                                    <td><b>Description</b></td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_CONTROL_SSL_CLOSURE</td>
+                                    <td>Disables standard SSL closure on the control channel forcing  SSL connections to close in a non-standard (and insecure) manner.  
+                                        This flag may be useful if it is found that the client or the server 
+                                        (or both) freezes when the FTP connection is closed.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_CONTROL_SSL_CLOSURE</td>
+                                    <td>
+                                        Disables standard SSL closure on the data channel forcing 
+                                        SSL connections to close in a non-standard (and insecure) manner.  
+                                        This flag may be useful if it is found that the client or the server 
+                                        (or both) freezes after a data-transfer has completed. Note that it is unnecessary to use  
+                                        DISABLE_DATA_WAIT_ON_CLOSE  when using this flag.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_SSL_CLOSURE</td>
+                                    <td>
+                                        Disables standard SSL closure forcing on both data and control
+                                        channels SSL connections to close in a non-standard (and insecure) 
+                                        manner.  This flag may be useful if it is found that the client or the 
+                                        server (or both) freezes after a data-transfer or when the FTP 
+                                        connection is closed. Note that it is unnecessary to use the 
+                                        DISABLE_WAIT_ON_CLOSE when using
+                                        this flag.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_CONTROL_WAIT_ON_CLOSE</td>
+                                    <td>
+                                        Stops the client waiting for an SSL closure acknowledgement on 
+                                        the control channel.  This flag may be useful if it is found that 
+                                        the client freezes when the FTP connection is closed.
+                                        Note that it is unnecessary to use this flag when the 
+                                        DISABLE_CONTROL_SSL_CLOSURE flag is on.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_DATA_WAIT_ON_CLOSE</td>
+                                    <td>
+                                        Stops the client waiting for an SSL closure acknowledgement on 
+                                        the data channel.  This flag may be useful if it is found that 
+                                        the client freezes after a data-transfer.
+                                        Note that it is unnecessary to use this flag when the 
+                                        DISABLE_DATA_SSL_CLOSURE flag is on.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_WAIT_ON_CLOSE</td>
+                                    <td>
+                                        Stops the client waiting for an SSL closure acknowledgement on 
+                                        both the control channel and the data channel.  This flag may be useful 
+                                        if it is found that the client freezes after a data-transfer or when the 
+                                        FTP connection is closed.
+                                        Note that it is unnecessary to use this flag when the 
+                                        DISABLE_SSL_CLOSURE flag is on.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>START_WITH_CLEAR_DATA_CHANNELS</td>
+                                    <td>
+                                        By default the scripting client switches to private
+                                        data channels immediately after connecting. This flag disables this, so that data channels are clear.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ALLOW_BASIC_CONSTRAINTS_IN_NON_CA</td>
+                                    <td>
+                                        Enabling this flag relaxes the checking of basic constraints.  Basic constraints
+                                        are sometimes present when they are not required.  By default, they are checked
+                                        if they're present (even if they're not required to be there) and connections
+                                        will fail if they are then found to be nonstandard.  Enabling this flag will
+                                        prevent failures in cases where basic constraints are not required.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DISABLE_SESSION_RESUMPTION</td>
+                                    <td>
+                                        Disables SSL/TLS session resumption.
+                                        Session resumption is a feature of SSL/TLS, which speeds up the establishment of
+                                        secure connections by caching certain cryptographic parameters during the first
+                                        connection, such that they may be used in subsequent connections.  This is 
+                                        particularly handy for FTPS which opens a new connection for each file transfer.
+                                        Occasionally it can cause problems when establishing secure connections on 
+                                        data-channels, so this flag is provided for disabling the feature and thus 
+                                        forcing a full exchange of cryptographic data for every file.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set tlsdebug</b></td>
+                    <td>Sets
+                        the level of SSL/TLS debugging. Different levels display different portions
+                        of TLS debugging information. The possible levels are 0,1,2,4,8,16,32,64,256,65535. Use 65535 to get all possible debugging output for SSL/TLS processing (warning - there is a lot).
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>set cryptodebug</td>
+                    <td>Sets debugging of cryptographic code on or off, e.g. set cryptodebug=true</td>
+                </tr>
+                <tr>
+                    <td><b>echo</b></td>
+                    <td>
+                        Echos the value of a variable to standard output, whether user-defined or a system variable such 
+                        as 'protocol'. The variable must be preceded by a '$' to identify it as a variable, 
+                        e.g. <tt>echo $protocol</tt>. 
+                        </br></br>
+                        A synonym for echo is  print.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>open</b> <i>[host[:port]]</i></td>
+                    <td>
+                        Opens the connection to the remote server. The user and password must already
+                        be set via the set command. If the remote host is not already set, it
+                        must be supplied here (and will override any previous setting for this
+                        connection attempt). The port number can also be optionally supplied (but the host must be provided). e.g. open
+                        edtmobile:21</br></br>
+                        Can also use <i>connect</i>. 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>binary</b></td>
+                    <td>Change the current transfer mode to binary mode. Binary is the default.</br></br>
+                        Can use <i>bin</i> as an abbreviation.
+                    </td>
+                </tr>
+                <tr>
+                    <td><B>ascii</td>
+                    <td>Change the current transfer mode to ASCII mode. Binary is the default.</br></br>
+                        Can use <i>asc</i> as an abbreviation.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>pwd</b></td>
+                    <td>Print the current remote working directory. </td>
+                </tr>
+                <tr>
+                    <td><b>dir</b> <i>[remotedir]</i></td>
+                    <td>Perform a detailed listing of the current directory if no directory
+                        is supplied as an argument, or of the supplied remote directory. </br></br>
+                        See <i>ls</i> for a similar command. A synomyn of <i>dir</i>
+                        is <i>ls -l</i>. 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>ls</b> <i>[remotedir]</i></td>
+                    <td>Perform a simple listing (just filenames) of the current directory if no directory
+                        is supplied as an argument, or of the supplied remote directory. If <i>ls -l</i> is used, a 
+                        detailed listing is supplied.</br></br>
+                        See <i>dir</i> for a similar command. A synomyn of <i>ls -l</i>
+                        is <i>dir</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>cd</b> <i>remotedir</i></td>
+                    <td>Change the current remote working directory to <i>remotedir</i>. </td>
+                </tr>
+                <tr>
+                    <td><b>cdup</b></td>
+                    <td>Change the current remote working directory to its parent directory. </td>
+                </tr>
+                <tr>
+                    <td><b>mkdir</b> <i>remotedir</i></td>
+                    <td>Create the <i>remotedir</i> directory.</td>
+                </tr>
+                <tr>
+                    <td><b>rmdir</b> <i>remotedir</i> </td>
+                    <td>Delete the <i>remotedir</i> directory. It must be empty.</td>
+                </tr>
+                <tr>
+                    <td><b>get</b> <i>remotefile [localfile]</i></td>
+                    <td>Download a remotefile to the local host. The <i>localfile</i>
+                        parameter can be a filename or the full path of a local file. If it is
+                        a filename, the current local working directory is prepended.</br></br>
+                        Note that the <i>localfile</i>
+                        parameter is optional - if not supplied, the downloaded file is saved
+                        in the current local working directory with the name of <i>remotefile</i>.</br></br>
+                        The <i>remotefile</i>
+                        parameter can be a filename or a path. Not all servers support the use
+                        of a path - in this case navigate to the correct
+                        remote directory using <i>cd</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>put</b> <i>localfile [remotefile]</i></td>
+                    <td>Upload
+                        a local file to the remote host. The <i>localfile</i> parameter
+                        can be a filename or the full path of a local file. If it is a
+                        filename, the current local working directory is prepended.</br></br>
+                        The <i>remotefile</i>
+                        parameter should be a filename or
+                        a path. Not all servers support the use of a path - in this case
+                        navigate to the correct
+                        remote directory using <i>cd</i>.</br></br>
+                        If the <i>remotefile</i> parameter
+                        is not
+                        supplied, the local file name will be used. 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>append</b> <i>localfile [remotefile]</i></td>
+                    <td>Append
+                        the contents of a local file to a remote file (if it exists) on the
+                        remote host. The <i>localfile</i>
+                        parameter
+                        can be a filename or the full path of a local file. If it is a
+                        filename, the current local working directory is prepended.</br></br>
+                        The <i>remotefile</i> parameter
+                        should be a filename or
+                        a path. Not all servers support the use of a path - in this case
+                        navigate to the correct
+                        remote directory using <i>cd</i>.</br></br>
+                        If the <i>remotefile</i> parameter
+                        is not
+                        supplied, the local file name will be used.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>rename</b> <i>remotefile1 remotefile2</i></td>
+                    <td>Rename
+                        a remote file from
+                        <i>remotefile1</i> to <i>remotefile2</i>.
+                        Note that both parameters should be filenames, not
+                        full paths.</br></br>
+                        Can use <i>ren</i> as an
+                        abbreviation.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>delete</b> <i>remotefile</i></td>
+                    <td>Delete a remote file in the current remote working directory. </br></br>
+                        Can use <i>del</i>
+                        as an abbreviation. 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>mdelete</b> <i>wildcard</i></td>
+                    <td>Delete
+                        multiple remote files that match the wildcard in the current
+                        remote working directory. </br></br>
+                        Wildcards supported are '?' for a single matching character, and '*'
+                        for multiple matching characters. e.g. to delete all text files in the
+                        current remote directory, use <i>mdel *.txt</i></br></br>
+                        Can use <i>mdel</i> as an
+                        abbreviation.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>mput</b> <i>wildcard</i></td>
+                    <td>Upload multiple
+                        local files that match the wildcard in the current local working
+                        directory to the current remote working directory. </br></br>
+                        Wildcards supported
+                        are '?' for a single matching character, and '*' for multiple matching
+                        characters. e.g. to upload all text files from the current local
+                        working
+                        directory, use <i>mput *.txt</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>mget</b> <i>wildcard</i></td>
+                    <td>Download
+                        multiple
+                        local files that match the wildcard in the current remote working
+                        directory to the current local working directory. </br></br>
+                        Wildcards supported
+                        are '?' for a single matching character, and '*' for multiple matching
+                        characters. e.g. to download all text files from the current remote
+                        working
+                        directory use <i>mget *.txt</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>close</b></td>
+                    <td>Closes
+                        the connection to the remote server.</br></br>
+                        Can also use <i>bye, quit, exit</i> or <i>disconnect</i>. 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>quote</b> <i>command</i></td>
+                    <td>Sends the quoted command to the server and displays the response.</td>
+                </tr>
+                <tr>
+                    <td><b>site</b> <i>parameters</i></td>
+                    <td>Sends a SITE command to the FTP server with the supplied parameters. These parameters
+                        can vary widely between FTP servers. This command is not applicable to SFTP servers.</br></br>
+                        For example <i>site CHMOD 0600 /home/user/privatefile</i> might
+                        be used to change the permissions of a file on an FTP server that supports this feature.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>auth</b></td>
+                    <td>Change
+                        from unencrypted 'plain' FTP into secure FTP. </br></br>
+                        Supported options are <i>ssl, tls, or tls-c</i>. e.g. <i>auth tls</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>protect</b></td>
+                    <td>Change
+                        the protection level of the data channel.</br></br>
+                        Supported options are 
+                        <i>clear</i> (or <i>c</i>) to set data
+                        channels to unencrypted, and <i>private</i> (or <i>p</i>)
+                        to set data channels to encrypted. e.g. <i>protect clear</i></br></br>
+                        Alternatively
+                        <i>private</i>
+                        has the same effect as <i>protect private</i>, and <i>clear</i>
+                        has the same effect as <i>protect clear</i>.</br></br>
+                        An abbreviation for <i>protect</i> 
+                        is <i>prot</i>, which combined with the argument abbreviations means that to set
+                        the data channels to unencrypted could be done with <i>prot c</i>, and to set to
+                        encrypted could be done with <i>prot p</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>private</b></td>
+                    <td>Change
+                        the protection level of the data channel to private. Identical to <i>protect private</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>clear</b></td>
+                    <td>Change
+                        the protection level of the data channel to clear. Identical to <i>protect clear</i>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>ccc</td>
+                    <td>Clears
+                        the control channel, setting it back to plain unencrypted text. This
+                        can be useful when using firewalls, which need to be able to inspect
+                        the control channel to open data channel ports.</br></br>
+                        Once <i>ccc</i>
+                        has been called, no more <i>protect</i>
+                        commands can be used. This is a security measure inherent in the
+                        protocol.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+

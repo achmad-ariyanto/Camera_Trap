@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>Active and Passive Modes</title>
+        <meta name="keywords" content="Chapter 1,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>Active and Passive Modes</h1>
+        <p>Data connections may be set up in two different ways, active and passive. Note that active and passive refer to the operation of the FTP server, not the client.</p>
+        <h4>Passive mode</h4>
+        <p>In passive mode, the client sends a PASV command to the server. This tells the server to listen for a connection attempt from the client, hence the server is passively waiting. 
+            The server replies to PASV with the host and port address that the server is listening on. The client deciphers this reply and when a data connection is required, attempts to initiate the connection to the server at this address.
+        </p>
+        <h4>Active mode</h4>
+        <p>In active mode, the server actively connects to the client. To set up active mode, the client sends a PORT command to the server, specify the address and port number the client is listening on. When a data connection is required, the server initiates a connection to the client at this address.</p>
+        <p>Generally the server is responsible for closing data connections.</p>
+        <p>Next: <a href="ftpcommands.html">FTP Commands</a></p>
+    </body>
+</html>
+

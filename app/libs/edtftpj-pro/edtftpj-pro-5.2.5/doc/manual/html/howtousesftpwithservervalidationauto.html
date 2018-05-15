@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (with server validation - automatic)</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (with server validation - automatic)</h1>
+        <p>The topic <a href="howtousesftpwithservervalidationknownhosts.html">How to use SFTP (with server validation - known hosts)</a> explains how the known_hosts file is used to validate the server being connected to. </p>
+        <p>Typically, the known_hosts file is generated when a command-line client first connects to a server - a prompt asks if the server should be added to the list of known hosts. 
+            This behavior can be produced in edtFTPj/PRO as follows:
+        </p>
+        <p>The <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPValidator.html">SSHFTPValidator</a> class loads and caches the known hosts in memory. To automatically add a new host's public key when connecting, 
+            it is necessary to subclass SSHFTPValidator, and assign a new instance to <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>. 
+        </p>
+        <p>The key method to override is the <i>validate</i> method. A boolean is passed in together with the server's hostname/IP address and the server's public key. The boolean indicates if the server has been found in the cached known hosts list. If it has not been found, it can at this point be added. An example is shown below: </p>
+        <pre><code class="language-java">class MyServerValidator extends SSHFTPValidator {
+  protected boolean validate(String hostSpecifier, SSHFTPPublicKey publicKey, boolean hostKnown) {
+    if (!hostKnown) {
+      try {
+        addKnownHost(hostSpecifier, publicKey);
+      }
+      catch (Exception ex) {
+        log.error("Failed to add host '" + hostSpecifier + "' to known hosts", ex);
+      }
+    }
+    return true;
+  }
+} </code></pre>
+        <p>To set the new validator, use the <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setValidator%28com.enterprisedt.net.ftp.ssh.SSHFTPValidator%29">setValidator</a>() method, as shown below: </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setValidator%28com.enterprisedt.net.ftp.ssh.SSHFTPValidator%29">setValidator</a>( new MyServerValidator() ); </code></pre>
+        <p>To save the cached known hosts to the known_hosts file, use the <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPValidator.html#saveKnownHosts%28%29">saveKnownHosts</a> method, as shown below: </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#getValidator%28%29">getValidator</a>().<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPValidator.html#saveKnownHosts%28%29">saveKnownHosts</a>(); </code></pre>
+        <p>Note that it is not recommended to automatically add server public keys to the known_hosts file when connecting, as this removes an important part of SSH security - server validation. 
+            Instead, there should always be a review process - typically a dialog box presented to the user asking them to confirm if the key should be added. 
+            This simple example is presented to show how the mechanism works. 
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

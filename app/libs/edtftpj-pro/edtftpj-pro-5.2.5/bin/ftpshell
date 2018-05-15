@@ -1,0 +1,14 @@
+#! /bin/sh
+FTP_HOME=`dirname "$0"` 
+FTP_HOME=`dirname "$FTP_HOME"`
+
+if [ $FTP_HOME = "." ]; then
+    FTP_LIB=../lib
+else
+    FTP_LIB=$FTP_HOME/lib
+fi
+
+CP=$FTP_LIB/edtftpjpro.jar:$FTP_LIB/license.jar
+
+java -classpath $CP com.enterprisedt.net.ftp.script.FTPShell $@
+

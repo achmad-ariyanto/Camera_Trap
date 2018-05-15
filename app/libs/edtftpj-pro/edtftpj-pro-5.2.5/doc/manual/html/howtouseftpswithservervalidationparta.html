@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (with server validation - part A)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (with server validation - part A)</h1>
+        <p>The topic <a href="howtouseftpsintroduction.html">How to use FTPS (introduction)</a> describes the FTPS features of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>. 
+            This topic demonstrates the use of FTPS with server validation in the case where the server certificate's CommonName (CN) is the same as its address.
+        </p>
+        <p>Firstly, the root certificate (the certificate of the <a href="certificatesandcertificateauthoritiescas.html">CA</a> that issued the certificate)  must be loaded. Alternatively, the server certificate
+            itself can be loaded. The PEM format is widely used, and loading a PEM certificate is shown below:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#getRootCertificateStore%28%29">getRootCertificateStore</a>().importPEMFile(certificateFile);</code></pre>
+        <p>As in <a href="howtouseftpswithoutservervalidation.html">FTPS without server validation</a>, connect() must then be called, followed by auth():</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#connect%28%29">connect</a>();
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#auth%28java.lang.String%29">auth</a>(SSLFTPClient.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#AUTH_TLS">AUTH_TLS</a>);</code></pre>
+        <p>While the secure connection is being established the CommonName (CN) of the server certificate is checked against the hostname of the server. If this check fails, the connection will fail.  Please refer to 
+            <a href="howtouseftpswithservervalidationpartb.html">How to use FTPS (with server validation - part B)</a> and <a href="howtouseftpswithservervalidationpartc.html">How to use FTPS (with server validation - part C)</a> 
+            for more details on this issue. 
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

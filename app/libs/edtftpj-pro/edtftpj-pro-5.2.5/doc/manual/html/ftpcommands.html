@@ -1,0 +1,42 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>FTP Commands</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Topic 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+<body>
+    <h1>FTP Commands</h1>
+    <p>FTP commands sent across the control connection consist of simple text strings (and follow the Telnet protocol - see RFC 854). For example, to retrieve a file, the client sends "RETR filename" on 
+        the control connection to the FTP server. To transfer a file, the client sends "STOR filename". 
+    </p>
+    <p>The FTP server acknowledges each command with an FTP reply, which consists of a three digit number followed by human-readable text. The first digit indicates if the response is good, bad, or incomplete. 
+        If an error occurred, the second digit may be used to indicate what type of error occurred. Similarly, the third digit can indicate more details of the error.
+    </p>
+    <p>The first digit is the most important, and the five possible values are described below:</p>
+    <table border="1"  bordercolor="#999999"  width="567"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+        <tr>
+            <td><b>Reply</b></td>
+            <td><b>Description</b></td>
+        </tr>
+        <tr>
+            <td>1yz</td>
+            <td>Positive Preliminary reply. The request action has been initiated, but another reply is to be expected before the client issues another command.</td>
+        <tr>
+            <td>2yz</td>
+            <td>Positive Completion reply. The requested action has successfully completed, and the client may issue another command.</td>
+        <tr>
+            <td>3yz</td>
+            <td>Positive Intermediate reply. The command has been accepted, but more information is required. The client should send another command in reply.<</td>
+        <tr>
+            <td>4yz</td>
+            <td>Transient Negative reply. The command failed, but it can be retried.</td>
+        <tr>
+            <td>5yz</td>
+            <td>Permanent Negative Completion reply. The command failed, and should not be repeated.</td>
+        </tr>
+    </table>
+    <p>Next: <a href="samplescenarios.html">Sample Scenarios</a></p>
+</body>
+</html>
+

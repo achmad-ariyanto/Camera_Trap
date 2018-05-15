@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>Obtaining Keys and Certificates</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>Obtaining Keys and Certificates</h1>
+        <p>A private-public key-pair is easy to generate.  Likewise, an "uncertified" certificate may be generated with little effort, but obtaining a trustworthy certificate from a CA necessarily requires some work, 
+            time, and (usually) cost.  It involves interacting with the CA to prove identity, and waiting for the CA to digitally sign the certificate.
+        </p>
+        <p>Alternatively OpenSSL may be used.  The reader is referred to the <a href="http://www.openssl.org/docs/HOWTO/keys.txt">OpenSSL Key HOWTO</a> for instructions on generating key-pairs and to the 
+            <a href="http://www.openssl.org/docs/HOWTO/certificates.txt">OpenSSL Certificate HOWTO</a> for generating certificates.  
+            It is recommended that keys with a length of at least 768 bits are used. OpenSSL may be obtained from <a href="http://www.openssl.org/source/">http://www.openssl.org/source/</a> or 
+            <a href="http://www.openssl.org/related/binaries.html">http://www.openssl.org/related/binaries.html</a>.
+        </p>
+        <p>Next: <a href="serverandclientvalidation.html">Server and Client Validation</a></p>
+    </body>
+</html>
+

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (with client validation - keyboard-interactive authentication)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (with client validation - keyboard-interactive authentication)</h1>
+        <p>The topic <a href="howtousesftpwithclientvalidation.html">How to use SFTP (with client validation - password authentication)</a> discusses the simplest form of client authentication, via password.</p>
+        <p>Keyboard-interactive (KBI) authentication is the most recently introduced form of authentication for SSH. It involves the server sending prompts to the client, which the client must respond to correctly 
+            to be authenticated. Its purpose is permit the client to support a variety of authentication mechanisms without knowing anything about them.
+        </p>
+        <p>edtFTPj/PRO's implementation of KBI authentication relies on the programmer knowing the prompts in advance. The prompts are easily determined by connecting to the server via a command-line ssh client, using KBI.</p>
+        <p>In edtFTPj/PRO, when the server sends its list of prompts that require responses, the client searches the list of loaded <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHAuthPrompt.html">SSHAuthPrompts</a> 
+            for each prompt. It then sends the set responses back to the server. If the expected responses are supplied, the authentication succeeds.
+        </p>
+        <p>If the prompt is for a user's password, it will typically be something like "<tt>Password:</tt>". The <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHPasswordPrompt.html">SSHPasswordPrompt</a> class is 
+            supplied to make it easier to set up a password prompt. 
+        </p>
+        <p>Often, the password prompt is the only prompt required. Of course, there are other prompts that could be requested, such as an RSA SecurID token. Some servers have a number of submethods that can be configured for KBI. </p>
+        <p>An example of using <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHPasswordPrompt.html">SSHPasswordPrompt</a> is shown below</p>
+        <pre><code class="language-java">SSHAuthPrompt[] prompts = new SSHAuthPrompt[1];
+prompts[0] = new SSHPasswordPrompt(password);
+ftp.setAuthentication(username, prompts);</code></pre>
+        <p>Sometimes servers will allow for failure of one type of KBI prompt (e.g. SecurID), responding to another attempt with a different prompt (such as for password). edtFTPj/PRO makes a second 
+            KBI authentication attempt automatically if the first attempt fails.
+        </p>
+        <p>The other authentication method, public key authentication, is discussed in <a href="howtousesftpwithclientvalidationpublickeyauthentication.html">How to use SFTP (with client validation - public key authentication)</a>.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

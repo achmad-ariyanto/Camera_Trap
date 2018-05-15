@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (choosing algorithms)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (choosing algorithms)</h1>
+        <p>In <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a> the algorithms that the client presents to the server for negotiation can be specified if required. 
+            The server will have its own set of preferred algorithms configured, and the protocol chooses one of the algorithms supported by both client and server.
+        </p>
+        <p>A number of types of algorithms can be specified - the preferred public key algorithms that control the type of the server supplied public key (key-pair algorithms), the preferred cipher algorithms (used 
+            to encrypt data), the MAC algorithms (used to authenticate messages) , and the key-exchange algorithms (for establishing keys between client and server). 
+        </p>
+        <p>The latter two types (MAC and key-exchange) are beyond the scope of this documentation. <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a> is already configured with all 
+            its available algorithms. The main reason for modifying them is to restrict the algorithms being used.
+        </p>
+        <p>The <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPAlgorithm.html">SSHFTPAlgorithm</a> class defines the types of algorithms and lists the currently supported algorithms in edtFTPj/PRO. 
+            Various methods on <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a> list and control which algorithms are available. 
+        </p>
+        <p>To list all available algorithms of all types, use <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#getEnabledAlgorithms%28%29">getEnabledAlgorithms</a>. To disable all algorithms of all types, 
+            use <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#disableAllAlgorithms%28%29">disableAllAlgorithms</a>. 
+        </p>
+        <h4>Public key algorithms</h4>
+        <p>Either DSA or RSA or both can be set for the preferred public key algorithms for server authentication. If, for example, RSA is set, the server will present an RSA public key to the client (if the server 
+            supports RSA keys of course - some servers do not). The code below illustrates how to set RSA only. It first disables all keypair algorithms, then enables RSA:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#disableAllAlgorithms%28int%29">disableAllAlgorithms</a>(SSHFTPAlgorithm.KEY_PAIR);
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setAlgorithmEnabled%28com.enterprisedt.net.ftp.ssh.SSHFTPAlgorithm,%20boolean%29">setAlgorithmEnabled</a>(SSHFTPAlgorithm.KEY_RSA, true); </code></pre>
+        <p>The default is both DSA and RSA enabled.</p>
+        <h4>Cipher algorithms</h4>
+        <p>The cipher algorithms are the symmetric algorithms used to perform the encryption of the SFTP data and commands. The code below illustrates how to set triple DES as the cipher algorithm (disabling all others):</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#disableAllAlgorithms%28int%29">disableAllAlgorithms</a>(SSHFTPAlgorithm.CIPHER);
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setAlgorithmEnabled%28com.enterprisedt.net.ftp.ssh.SSHFTPAlgorithm,%20boolean%29">setAlgorithmEnabled</a>(SSHFTPAlgorithm.CIPHER_3DES_CBC, true);</code></pre>
+        <p>The default is all cipher algorithms enabled.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

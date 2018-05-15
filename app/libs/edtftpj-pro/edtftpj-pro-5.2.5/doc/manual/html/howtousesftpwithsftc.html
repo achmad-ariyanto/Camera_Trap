@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (with the multi-protocol client)</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (with the multi-protocol client)</h1>
+        <p>The topic <a href="howtousesftpintroduction.html">How to use SFTP (introduction)</a> and subsequent SFTP topics describe the SFTP features of <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>. 
+            This topic demonstrates how <a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html">SecureFileTransferClient</a> can be used for SFTP.
+        </p>
+        <p>At the most basic level of SFTP, assuming that the remote host, user and password are set, all that is required is to set the protocol to SFTP, which is done via the <i>setProcotol</i> method, as below: </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html#setProtocol(Protocol)">setProtocol(Protocol.SFTP)</a>;
+ftp.connect();</code></pre>
+        <p>The code above, by default, does not perform server validation. Server validation should always be enabled for production machines, so that the wrong server is not communicated with. 
+            To validate the server, the <a href="howtousesftpwithservervalidationknownhosts.html">known_hosts</a> file must be loaded, via the <i>loadSSHServerValidation</i> method:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html#loadSSHServerValidation(String)">loadSSHServerValidation(knownHostsPath)</a>;
+ftp.connect();</code></pre>
+        <p>Numerous other SSH settings, including those for client validation, algorithms and server compatibility settings can be accessed via the 
+            <a href="../../api/com/enterprisedt/net/ftp/AdvancedSSHSettings.html">AdvancedSSHSettings</a> class, accessed by the <i>getAdvancedSSHSettings()</i> method. 
+        </p>
+        <p>Other configuration options are available via the <a href="../../api/com/enterprisedt/net/ftp/AdvancedGeneralSettings.html">AdvancedGeneralSettings</a> class, accessed by the <i>getAdvancedSettings()</i> method. </p>
+        <p>All of these configuration options should be set before the <i>connect()</i> method is called. </p>
+        <h4>Example</h4>
+        <p> The following example illustrates the use of SecureFileTransferClient for SFTP, using both client and server validation. Public key authentication is used. Note that the client's public key must be registered with the server.</p>
+        <pre><code class="language-java">// basic settings
+SecureFileTransferClient client = new SecureFileTransferClient();
+client.setRemoteHost(host);
+client.setUserName(user);
+client.setProtocol(Protocol.SFTP);
+    
+// server validation
+client.loadSSHServerValidation(knownHostsFile);
+    
+// public key authentication - must set explicitly to this auth type
+client.getAdvancedSSHSettings().setAuthenticationType(SSHAuthenticationType.PUBLIC_KEY);
+client.getAdvancedSSHSettings().setPrivateKeyFile(clientKeyFile);
+client.getAdvancedSSHSettings().setPrivateKeyFilePassphrase(clientPassphrase);
+    
+// connect
+client.connect();
+    
+// do stuff
+    
+// disconnect from server
+client.disconnect();</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

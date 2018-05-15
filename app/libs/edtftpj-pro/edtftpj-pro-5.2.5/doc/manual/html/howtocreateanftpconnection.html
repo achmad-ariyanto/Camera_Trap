@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <title>How to connect to an FTP server</title>
+        <META name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </HEAD>
+    <BODY>
+        <h1>How to connect to an FTP server</h1>
+        <p>Connecting to an FTP server with edtFTPj/PRO is simply a matter of:</p>
+        <ol>
+            <li>
+                Creating an <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a> object.
+                <pre><code class="language-java">FTPClient ftp = new FTPClient();</code></pre>
+            </li>
+            <li>
+                Setting the remote host.
+                <pre><code class="language-java">ftp.setRemoteHost(host);</code></pre>
+            </li>
+            <li>
+                Calling the connect() method.
+                <pre><code class="language-java">ftp.connect();</code></pre>
+            </li>
+            <li>
+                Logging in.
+                <pre><code class="language-java">ftp.login(username, password);</code></pre>
+            </li>
+            <li>
+                Logging out and closing the connection.
+                <pre><code class="language-java">ftp.quit();</code></pre>
+            </li>
+        </ol>
+        <p>The connect() call will return when it's successfully connected, or throw an exception if it fails to connect. Similarly, the login() call will return when successfully logged into the server.</p>
+        <script src="../js/prism.js"></script>    
+    </BODY>
+</HTML>
+

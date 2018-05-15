@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FTPS (without server validation)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FTPS (without server validation)</h1>
+        <p>The topic <a href="howtouseftpsintroduction.html">How to use FTPS (introduction)</a> describes the FTPS features of <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>.  
+            This topic demonstrates the use of FTPS without server validation. Server validation should always be used in a production environment, but disabling it is a good way of getting started.
+        </p>
+        <p>Using FTPS without server validation is shown in the example below:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#setValidateServer%28boolean%29">setValidateServer</a>(false);
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#connect%28%29">connect</a>();
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#auth%28java.lang.String%29">auth</a>(SSLFTPClient.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#AUTH_TLS">AUTH_TLS</a>);</code></pre>
+        <p>The first line disables server validation, the second line connects to the server, and the third line switches to TLS (secure mode). </p>
+        <p>After this, all that is required is to login as normal:</p>
+        <pre><code class="language-java">ftp.login(username, password);</code></pre>
+        <p>Now it can be treated as an ordinary FTP client, i.e. all the normal FTP operations of <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a> (which are inherited by 
+            <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>) can be performed. 
+        </p>
+        <p><b>Note</b>: Some FTPS servers don't fully comply with the relevant standards, and in particular don't close SSL connections correctly. If you are experiencing hangs on the completion of data transfers, or problems when the connection is closed, try using the DISABLE_SSL_CLOSURE configuration flag before connecting, as shown below:</p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html#setConfigFlags%28int%29">setConfigFlags</a>(SSLFTPClient.ConfigFlags.<a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.ConfigFlags.html#DISABLE_SSL_CLOSURE">DISABLE_SSL_CLOSURE</a>);</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

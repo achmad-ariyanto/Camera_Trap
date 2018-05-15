@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to FTP through a SOCKS proxy</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to FTP through a SOCKS proxy</h1>
+        <p>Please refer to the topic <a href="socksproxies.html">SOCKS Proxies</a> for more information on this.</p>
+        <p>To direct socket communications via a SOCKS proxy, the <a href="../../api/com/enterprisedt/util/proxy/ProxySettings.html">ProxySettings</a> of the client must be set appropriately. An example is shown below:</p>
+        <pre><code class="language-java">ProFTPClient ftp = new ProFTPClient();
+ftp.getProxySettings().setProxyAddress("myinternalproxyaddress");
+ftp.getProxySettings().setProxyPort(1080);
+ftp.getProxySettings().setProxyPassword("myuser");
+ftp.getProxySettings().setProxyUserName("mypassword");
+ftp.getProxySettings().setPublicProxyAddress("mypublicproxy");
+ftp.getProxySettings().setProxyType(ProxyType.SOCKS5); </code></pre>
+        <P> Note that the public proxy address is generally only required when using FTP in active mode. In this situation, the PORT command must advertise the public proxy address to the FTP server that 
+            will be connecting back to the client.
+        </P>
+        <P>To use SOCKS4, simply use <i>ProxyType.SOCKS4</i>. The password is not required for SOCKS4, as authentication is not supported in SOCKS4. </P>
+        <p><a href="../../api/com/enterprisedt/net/ftp/SecureFileTransferClient.html">SecureFileTransferClient</a>, 
+            <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, 
+            <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>, and 
+            <a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html">ProFTPClient</a> all support the use of a SOCKS proxy. 
+        </p>
+        <script src="../js/prism.js"></script> 
+    </body>
+</html>
+

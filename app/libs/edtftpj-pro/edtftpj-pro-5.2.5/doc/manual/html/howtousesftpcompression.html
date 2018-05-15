@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use SFTP (data compression)</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use SFTP (data compression)</h1>
+        <p>SFTP supports the use of data compression to reduce the amount of data that is transmitted. Both the client and server agree on a compression algorithm. 
+            They then compress data before sending and decompress data when it is received. 
+        </p>
+        <p>Compression and decompression both use CPU time, but if transmission speeds are slow, transfers can be sped up significantly, particularly if text files are being transferred. 
+            A compression factor of 10x is not unusual for text files.  Media files are usually compressed already (e.g. JPEG and MPEG) and there will be little or no benefit in using compression. 
+            In fact with the added CPU time it may even be detrimental. 
+        </p>
+        <p>Typically, <a href="http://www.zlib.org" target="_blank">zlib</a> compression is the compression algorithm most commonly supported in SFTP servers, and zlib is supported in edtFTPj/PRO. 
+            No compression is set as the default, and zlib is specified as an option. If the server forces use of zlib compression it will happen automatically.
+        </p>
+        <p>If zlib compression is required (and is supported by the server), it should be set as the only compression option. This will force its use. 
+            To do this, all compression algorithms are disabled, then zlib is enabled, as shown below:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#disableAllAlgorithms%28int%29">disableAllAlgorithms</a>(SSHFTPAlgorithm.COMPRESSION);
+ftp.<a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html#setAlgorithmEnabled%28com.enterprisedt.net.ftp.ssh.SSHFTPAlgorithm,%20boolean%29">setAlgorithmEnabled</a>(SSHFTPAlgorithm.COMPRESSION_ZLIB, true); </code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

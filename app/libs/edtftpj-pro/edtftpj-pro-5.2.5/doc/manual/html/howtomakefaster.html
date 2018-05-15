@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to make transfers faster</title>
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+</head>
+<body>
+    <h1>How to make transfers faster</h1>
+    <p>Everyone wants fast transfers, and edtFTPj/PRO is configured by default to support fast transfers in most situations. There will, however, be times when particular situations require some performance tuning.</p>
+    <p>It should be noted that the FTP/FTPS protocols operate very differently to SFTP, and so what works for FTP/FTPS may not work for SFTP. SFTP is message based, so all reads and writes of remote files are sent 
+        as messages that require acknowledgements. FTP/FTPS simply writes data to or reads data from a socket in a continuous stream. It might be that different settings are necessary to optimize different protocols. 
+    </p>
+    <p>Before attempting to tune edtFTPj/PRO, it is worth trying a few other FTP clients to get an indication of whether improvements are possible. Filezilla, WinSCP and Unix clients such as <i>lftp</i> and <i>ncftp</i> 
+        can be used for comparison. If speeds are comparable, large improvements are not to be expected. 
+    </p>
+    <h4>Logging and monitoring </h4>
+    <p>To ensure maximum performance, the logging level should be set to <i>INFO</i> rather than <i>DEBUG</i> or <i>ALL</i>. This applies to all protocols - in particular the <i>ALL</i> level can slow transfers down 
+        considerably. If the monitor interval is set too low via <i>setMonitorInterval</i>, this could also impact performance. 
+    </p>
+    <h4>Application buffers </h4>
+    <p>Data is read from sockets and files into transfer buffers, and the size of these buffers can be adjusted via <i>setTransferBufferSize</i>. If transfers seem too slow, it is worth trying values from 2^12 (4096) up to 2^19 (524288). </p>
+    <h4>TCP/IP buffers </h4>
+    <p>TCP/IP socket buffer sizes can have a considerable effect on transfer speeds for high performance (GBbs) networks. For these networks it may be necessary to increase the read and write buffer sizes via 
+        <i>setNetworkBufferSize</i>. Try values from 2^16 (65536) up to 2^19 (524288). Note that currently these methods are not available for SFTP. 
+    </p>
+    <h4>SFTP Settings</h4>
+    <p>There are some specific settings for SFTP which should be tried if transfers seem too slow. By default, parallel writes are used (<i>setParallelMode</i>), speeding up transfers, but there are some servers 
+        that cannot cope with parallel writes and require this setting to be disabled. The SSH packet size can be varied, from the default of 32K up to 64K and down to much smaller values, e.g. 4096 (<i>setMaxPacketSize</i>). 
+    </p>
+</body>
+</html>
+

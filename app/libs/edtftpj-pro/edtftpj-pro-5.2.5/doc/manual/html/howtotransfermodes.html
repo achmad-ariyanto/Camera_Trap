@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>How to use binary or ASCII mode</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use binary or ASCII mode</h1>
+        <p>Files and data can be transferred in two different modes with all client classes - binary mode and ASCII mode. The transfer mode should always be
+            set explicitly to ensure the correct mode is used.
+        </p>
+        <h4>ASCII Mode</h4>
+        <p>ASCII mode should be used when end-of-line character translation is required. When using ASCII mode, files are <b>not</b> transferred byte-for-byte. Instead, the newline
+            character(s) on the source platform (e.g. in Windows, CR+LF) are replaced with the newline character(s) on the target platform (e.g. on
+            Unix, LF). This means the source file may not be the same size as the end result if the platforms differ. If binary mode is used, for
+            example, to transfer Unix text files to a Windows platform, many Windows text editors will not recognize the Unix newline characters,
+            and the file will be difficult to read. To use ASCII mode, the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setType%28com.enterprisedt.net.ftp.FTPTransferType%29">setType()</a>
+            method should be used, supplying the ASCII type as shown.
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setType%28com.enterprisedt.net.ftp.FTPTransferType%29">setType(FTPTransferType.ASCII)</a>;</code></pre>
+        <p>ASCII mode is the default for the majority of FTP servers and is therefore also the default in edtFTPj/PRO.</p>
+        <p>It's important to note that it is often acceptable to transfer text files in binary mode since most modern text editors are able to deal with UNIX and Windows end-of-line characters interchangably.
+            Furthermore, text files that appear to be ASCII files often contain "extended ASCII" characters which may be incompatible between different platforms. &nbsp;It is therefore advisable to use binary
+            mode unless end-of-line character translation is definitely required.
+        </p>
+        <h4>Binary Mode</h4>
+        <p>Binary mode (a.k.a. image mode) should be used whenever no end-of-line translation is required. In binary mode, the file is transferred byte-for-byte, i.e. an exact copy
+            of the file or data is transferred. Typically, binary mode is used for files such as executables, compressed files, media files and non-text
+            document formats such as OpenOffice or Microsoft Office files. To use binary mode, the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setType%28com.enterprisedt.net.ftp.FTPTransferType%29">setType()</a>
+            method should be used, supplying the BINARY type as shown.
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setType%28com.enterprisedt.net.ftp.FTPTransferType%29">setType(FTPTransferType.BINARY)</a>;</code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

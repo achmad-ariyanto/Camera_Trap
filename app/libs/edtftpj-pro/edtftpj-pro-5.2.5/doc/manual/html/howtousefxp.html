@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to use FXP for server-to-server transfers</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use FXP for server-to-server transfers</h1>
+        <p>The File Exchange Protocol (FXP) is a method of using the FTP protocol to transfer files from one remote FTP server to another - without routing the data via the client controlling the exchange. </p>
+        <p>The client maintains a standard FTP connection to each server, and can direct either server to connect to the other to initiate a file transfer. This is particularly useful when the client has only 
+            low bandwidth available but the servers are high bandwidth. 
+        </p>
+        <p>FXP is generally not enabled by default on most FTP servers. Enabling FXP support can make an FTP server vulnerable to an FTP bounce attack. For this reason it is not advisable to enable FXP on a publicly available FTP server. 
+            FXP is not currently supported for FTPS servers in edtFTPj/PRO. 
+        </p>
+        <p>Performing an FXP transfer between two FTP servers is straightforward using edtFTPj/PRO. Two separate FTPClient objects representing the source and destination FTP servers must be supplied to the 
+            <a href="../../api/com/enterprisedt/net/ftp/FXPTransfer.html">FXPTransfer</a> constructor. Before <b>transferFile</b> is called, the two clients must be logged in and have navigated to 
+            the correct directories where the file will be transferred from and to. Binary or ASCII mode should also be set in both clients as desired (and consistently). Sample code is shown below: 
+        </p>
+        <pre><code class="language-java">// set up source
+FTPClient source = new FTPClient();
+source.setRemoteHost(host1);
+source.connect();
+source.login(user1, password1);
+source.chdir(dir);
+    
+// set up destination
+FTPClient dest = new FTPClient();
+    
+dest.setRemoteHost(host2);
+dest.connect();
+dest.login(user2, password2);
+dest.chdir(dir);
+    
+// kick off the transfer
+FXPTransfer fxp = new FXPTransfer(source, dest);
+fxp.transferFile(file, file);
+    
+// quit both sessions
+source.quit();
+dest.quit(); </code></pre>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

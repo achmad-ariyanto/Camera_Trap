@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to FTP through other proxy servers</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to FTP through other proxy servers</h1>
+        <p>Many firewalls support a means of forming proxy connections other than SOCKS.</p>
+        <p>When supplying the remote hostname, the name of the firewall is supplied instead. Instead of supplying the remote user as the user, 
+            a string is supplied in the form of remoteuser@remotehost.com. The remote password is supplied as normal.
+        </p>
+        <p>For example:</p>
+        <pre><code class="language-java">ftp.setRemoteHost("firewallhostname");
+ftp.login("remoteuser@remotehost.com","remotePassword");</code></pre>
+        <p>Firewalls we have confirmed support this syntax at the time of writing include Check Point Firewall-1 and WinProxy.</p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

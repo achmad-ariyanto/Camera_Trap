@@ -1,0 +1,40 @@
+<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<head>
+    <title>FTPS Commands</title>
+    <meta name="generator"  content="HelpMaker.net" >
+    <meta name="keywords"  content="Chapter 2," >
+    <LINK REL="stylesheet" TYPE="text/css" HREF="ms-help://Hx/HxRuntime/HxLinkDefault.css">
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>FTPS Commands</h1>
+    <p>Although RFC2228 defines eight new commands, the TLS implementation uses just three of these, AUTH, PBSZ, and PROT.  In fact, one of these, PBSZ, appears to be redundant and is probably included only for
+        the purpose of satisfying the RFC specification.
+    </p>
+    <h4>AUTH (AUTHentication)</h4>
+    <p>The AUTH command takes a single parameter which defines the security mechanism to be used.  From the point of view of TLS, this parameter must be 'TLS'.  </p>
+    <pre><code class="language-java">> AUTH TLS</code></pre>
+    <p>The result of this is that an attempt is made to negotiate a TLS connection on the control channel.  This involves the server trying to validate itself to the client by sending its certificate - this 
+        is called Server Validation.  It may also involve the client sending its certificate to the server, which is called Client Validation.  Section  will present more detail on certificate validation.
+    </p>
+    <h4>PBSZ (Protection Buffer SiZe)</h4>
+    <p>The PBSZ command is intended by RFC2228 to define the buffer-size to be used by the security mechanism when it is encrypting data on the data-channel.  However, since TLS is a transport-layer 
+        protocol and therefore doesn't require explicit encryption of data by the application layer, this buffer-size is redundant.  Ford-Hutchinson therefore requires that a value of '0' is always passed as 
+        a parameter.
+    </p>
+    <pre><code class="language-java">> PBSZ 0</code></pre>
+    <p>While this call is redundant (as it is effectively implied by the AUTH command), it is required and must precede the PROT command.</p>
+    <h4>PROT (data channel PROTection level)</h4>
+    <p>PROT defines whether or not the data channel is to be protected.  Though RFC2228 defines four possible protection levels,  Ford-Hutchinson only defines two, Clear and Private.  
+        Clear means that no security is to be used on the data-channel, and Private means that the data- channel should be protected by TLS.  Thus there are two possible PROT commands:
+    </p>
+    <pre><code class="language-java">> PROT C</code></pre>
+    <p>for an unsecured data-channel, and</p>
+    <pre><code class="language-java">> PROT P</code></pre>
+    <p>for a TLS data-channel.</p>
+    <p>Next: <a href="ftpsusage.html">FTPS Usage</a></p>
+    <script src="../js/prism.js"></script>  
+</body>
+</html>
+

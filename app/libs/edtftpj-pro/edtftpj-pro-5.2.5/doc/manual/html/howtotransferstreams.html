@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to transfer directly from/to memory</title>
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org" />
+    <meta name="keywords" content="Chapter 3," />
+    <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+</head>
+<body>
+    <h1>How to transfer directly from/to memory</h1>
+    <p>One of the advantages of integrating FTP functionality directly into a product rather than using stand-alone FTP applications is that data can be transferred directly to and
+        from memory. This is particularly useful when transferring dynamic content needs, such as the results of database queries and other application data.
+    </p>
+    <p><a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a>, <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, and <a href="../../api/com/enterprisedt/net/ftp/ssh/SSHFTPClient.html">SSHFTPClient</a>
+        offer three alternatives for memory transfers: byte-arrays, streams and FTP streams. Byte-arrays are generally easier to deal with but do not facilitate streaming. In other
+        words, the data must be fully generated and stored in a byte-array before being transferred. This is fine when memory usage is not an issue, but if it is
+        necessary to limit memory usage then streams should be used.
+    </p>
+    <p><b>Byte-Array Transfers</b> are performed using the (overloaded) <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#get%28java.lang.String%29">get</a> and
+        <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#put%28byte%5B%5D,%20java.lang.String%29">put</a> methods. They simply take the byte-array and/or the remote file-name as parameters.
+    </p>
+    <pre><code class="language-java">string s = "Hello world";
+byte[] bytes = s1.getBytes();
+ftp.put(bytes, remoteFileName);</code></pre>
+    <p>Because all of the transferred data is stored in memory, byte array transfers should be avoided for large files.</p>
+    <p><b>FTP Streams</b> are subclasses of <i>InputStream</i> and <i>OutputStream</i>, and can be used in the same way. They are described in <a href="howtotransferstreams2.html">How to transfer using FTP streams.</a></p>
+    <p><b>Stream Transfers</b> allow the local data being transferred to be supplied as an InputStream, and the remote data to be written to a local OutputStream.</p>
+    <p>To transfer streams, the overloaded methods <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#get%28java.io.OutputStream,%20java.lang.String%29">get</a> and 
+        <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#put%28java.io.InputStream,%20java.lang.String%29">put</a> can be used as shown below:
+    </p>
+    <p>The following shows how a file can be wrapped in a stream and then uploaded:</p>
+    <pre><code class="language-java">InputStream srcStream = new FileInputStream(localFilename);
+ftp.put(srcStream, remoteFilename);</code></pre>
+    <p>Similarly, the following shows how a file can be downloaded to a stream:</p>
+    <pre><code class="language-java">OutputStream outStream = new FileOutputStream(localFilename);
+ftp.get(outStream, remoteFilename);</code></pre>
+    <p>The above examples of files wrapped in streams are trivial, however they illustrate how the API can be used.</p>
+    <script src="../js/prism.js"></script>
+</body>
+</html>
+

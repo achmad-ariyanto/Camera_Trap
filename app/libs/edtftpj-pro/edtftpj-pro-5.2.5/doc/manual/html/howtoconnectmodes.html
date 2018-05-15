@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>How to use active or passive mode</title>
+        <meta name="keywords" content="Chapter 3,">
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+        <link rel="stylesheet" type="text/css" href="../css/prism.css"/>
+    </head>
+    <body>
+        <h1>How to use active or passive mode</h1>
+        <p>In the FTP and FTPS protocols, data transfers are made on a different connection to the control connection - and a new connection is made for
+            each data transfer. This is not the case for SFTP, where all control information and data is transferred on the same connection. Connect
+            modes are thus only relevant to 
+            <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html">FTPClient</a>,
+            <a href="../../api/com/enterprisedt/net/ftp/ssl/SSLFTPClient.html">SSLFTPClient</a>, and 
+            <a href="../../api/com/enterprisedt/net/ftp/pro/ProFTPClient.html">ProFTPClient</a> classes.
+        </p>
+        <p>In FTP and FTPS, data connections can be made in two different ways - the server initiating the connection (active mode) or the client initiating the connection
+            (passive mode). For more discussion on connect modes, see <a href="activeandpassivemodes.html">Active and Passive Modes.</a>
+            The connect mode has certain implications for FTP'ing through firewalls - see <a href="howtoftpthroughafilewall.html">How to FTP through a NAT router/firewall</a>.
+        </p>
+        <h4>Active Mode</h4>
+        <p>To use active mode, the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setConnectMode%28com.enterprisedt.net.ftp.FTPConnectMode%29">setConnectMode()</a>
+            method should be used, supplying the ACTIVE mode as shown:
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setConnectMode%28com.enterprisedt.net.ftp.FTPConnectMode%29">setConnectMode(FTPConnectMode.ACTIVE)</a>;</code></pre>
+        <p>Note that in active mode, the client supplies the port number to which the server connects. This is normally a random port, but a port range can be specified (for example a
+            permissable range that is configured in a firewall). Use the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setActivePortRange(int,%20int)">setActivePortRange()</a>
+            method to set the range, e.g.
+        </p>
+        <pre><code class="language-java">ftp.setActivePortRange(12000, 12020);</code></pre>
+        <p>The port number being sent to the server can be found from the log file (in DEBUG mode), looking for the PORT command, e.g.</p>
+        <pre><code class="language-java">PORT 151,134,10,195,240,68</code></pre>
+        <p>The first four numbers are the IP address, and the last two form the port number. To calculate the port number that the server will try to connect to, multiple the first port number by 256 (2^8), 
+            and then add the second port number. In the example it will be 240*(2^8) + 68, yielding a port number of 61508.
+        </p>
+        <h4>Passive Mode</h4>
+        <p>To use passive mode, the <a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setConnectMode%28com.enterprisedt.net.ftp.FTPConnectMode%29">setConnectMode()</a>
+            method should be used, supplying the PASV type as shown.
+        </p>
+        <pre><code class="language-java">ftp.<a href="../../api/com/enterprisedt/net/ftp/FTPClient.html#setConnectMode%28com.enterprisedt.net.ftp.FTPConnectMode%29">setConnectMode(FTPConnectMode.PASV)</a>;</code></pre>
+        <p>If problems are being experienced with file transfers and directory listings (both of which use a new data connection), it is likely that a
+            firewall is preventing the creation of the data connection. Try swapping from active to passive modes, or vice versa. If this doesn't work, please refer to <a href="howtoftpthroughafilewall.html">How to FTP through a NAT
+            router/firewall.</a>
+        </p>
+        <script src="../js/prism.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:mshelp="http://msdn.microsoft.com/mshelp">
+    <head>
+        <title>How to set up extended logging</title>
+        <link rel="stylesheet" type="text/css" href="../css/edtmanual.css">
+    </head>
+    <body>
+        <h1>How to set up extended logging</h1>
+        <p>As discussed in <a href="howtosetuplogging.html">How to set up logging</a>, edtFTPj/PRO has a logging API based on log4j. There are three basic system properties that control logging, as shown in the table below:</p>
+        <table border="1"  bordercolor="#999999"  width="735"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+            <tbody>
+                <tr>
+                    <td><b>System Property</b></td>
+                    <td><b>Description </td>
+                    <td><b>Values</b></td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.level</td>
+                    <td>Controls the global logging level</td>
+                    <td>FATAL,ERROR, WARN,INFO,DEBUG,ALL,OFF</td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.log4j</td>
+                    <td>Controls log4j integration. Set to 'true' to enable log4j integration.</td>
+                    <td>true or false</td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.prefix</td>
+                    <td>Adds a prefix to all logger names for finer log4j control.</td>
+                    <td>a prefix string, e.g. 'com.enterprisedt.'</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>There are also additional (and more specialized) System properties that control lower levels of logging, primarily in the SSL/TLS and encryption classes. 
+            These properties control the amount of logging that the encryption and secure sockets libraries dump out. Altering these properties can cause a great deal of logging to occur, 
+            and they generally should not be modified.
+        </p>
+        <p>The properties are kept in the <tt>com.enterprisedt.net.ftp.ssl</tt> package, in <i>edtftpjssl.properties</i>. This file is embedded in the library's jar file.</p>
+        <p>Each property can be overridden by setting it as a system property. It is not recommended to change the values set in the properties file itself.</p>
+        <table border="1"  bordercolor="#999999"  width="735"  cellpadding="5"  cellspacing="0"  style="border-collapse: collapse; font-size:14px; margin-left:10px;">
+            <tbody>
+                <tr>
+                    <td><b>System Property</b></td>
+                    <td><b>Description<br></td>
+                    <td><b>Values</b></td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.cryptix.trace</td>
+                    <td>Controls Cryptix trace</td>
+                    <td>true or false</td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.cryptix.debug</td>
+                    <td>Controls Cryptix debug.</td>
+                    <td>true or false</td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.cryptix.slowdebug</td>
+                    <td>Controls Cryptix slow debug (extended dumps)</td>
+                    <td>true or false</td>
+                </tr>
+                <tr>
+                    <td>edtftp.log.puretls.level</td>
+                    <td>Controls PureTLS logging level</td>
+                    <td>0,1,2,4,8,16,32,64,256,65535</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+
